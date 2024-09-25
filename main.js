@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("node:path");
 const execFile = require("node:child_process").execFile;
+let {PythonShell} = require('python-shell')
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -29,6 +30,11 @@ app.whenReady().then(() => {
         }
       );
     });
+  });
+
+  ipcMain.handle('runPython', async (event, someArgument) => {
+    const result = await PythonShell.run('hello_world.py', null)
+    return result;
   });
 
   app.on("activate", () => {
