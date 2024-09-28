@@ -22,3 +22,14 @@ This repo requires a rebabel executable named main.exe in the main directory. If
 Use the command <code>npm run start</code> to run the app. Use the command <code>npm run make</code> to build.
 
 If you build the app, you should find the electron-test executable at out/electron-test-[linux windows mac].
+
+
+### Steps to create single file executable from rebabel_import_export.py using PyInstaller
+1. Create and activate Python [virtual environment](https://docs.python.org/3/library/venv.html) in top level of FrontendGapApp folder. 
+    - macOS commands
+        - `python3 -m venv .venv`
+        - `source .venv/bin/activate`
+2. Run `pip install -r requirements.txt`
+3. Change directory to 'rebabel_scripts'
+4. Run `pyinstaller --onefile --collect-all rebabel_format rebabel_import_export.py`
+5. The executable will be located in the 'dist' folder that is generated. The JavaScript looks for the executable in the top level of the 'rebabel_scripts' directory, so move the executable one directory up.
