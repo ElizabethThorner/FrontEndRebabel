@@ -2,11 +2,11 @@
 const activateCopy = document.getElementById("copyBtn");
 const activateImport = document.getElementById("importBtn");
 const activateExport = document.getElementById("exportBtn");
-const activatePython = document.getElementById("runPythonScript")
+const activatePython = document.getElementById("rebabelImportExport")
 
 activatePython.addEventListener("click", async () => {
-  const response = await window.py.runPython();
-  
+  const response = await window.py.rebabelImportExport();
+
   const paragraph = document.getElementById("python-text");
   paragraph.innerText = response;
 });

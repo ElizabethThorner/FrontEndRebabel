@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+const fs = require('fs');
+const util = require('node:util');
+const execFile = util.promisify(require("node:child_process").execFile);
 const path = require("node:path");
-const execFile = require("node:child_process").execFile;
-let {PythonShell} = require('python-shell')
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -32,20 +33,34 @@ app.whenReady().then(() => {
     });
   });
 
-  ipcMain.handle('runPython', async (event, someArgument) => {
-    const result = await PythonShell.run('hello_world.py', null)
+  ipcMain.handle('rebabelImportExport', async (event, someArgument) => {
+    const result = await execFile(
+      "./rebabel_import_export",
+      ["nlp_pos", "flextext", "/", "nlp_pos.txt", '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}'],
+    );
+
+    console.log("File conversion has taken place.")
+
+    fs.unlink("./temp.db", (err) => {
+      if (err) {
+        console.error(`Error removing the temp.db SQLite database.`);
+      } else {
+        console.log(`The temp.db SQLite database has been successfully removed.`);
+      }
+    });
     return result;
-  });
+  })
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
-});
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
+  });
+
 });
