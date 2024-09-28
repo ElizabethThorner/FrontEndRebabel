@@ -35,7 +35,7 @@ app.whenReady().then(() => {
 
   ipcMain.handle('rebabelImportExport', async (event, someArgument) => {
     const result = await execFile(
-      "./rebabel_import_export",
+      "./rebabel_scripts/rebabel_import_export",
       ["nlp_pos", "flextext", "/", "nlp_pos.txt", '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}'],
     );
 
