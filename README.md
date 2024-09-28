@@ -33,3 +33,4 @@ If you build the app, you should find the electron-test executable at out/electr
 3. Change directory to 'rebabel_scripts'
 4. Run `pyinstaller --onefile --collect-all rebabel_format rebabel_import_export.py`
 5. The executable will be located in the 'dist' folder that is generated. The JavaScript looks for the executable in the top level of the 'rebabel_scripts' directory, so move the executable one directory up.
+6. The executable will run by clicking the 'Convert' button on the user interface after running `npm run start`.
