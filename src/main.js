@@ -62,17 +62,17 @@ app.whenReady().then(() => {
   ipcMain.handle("rebabelConvert", async (event, data) => {
     let conversionFailure = false;
 
+    //Gets OS specific executable name
+    const executableName = getExecutableName();
+
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
-    const { stdout, stderr } = await execFilePromisified(
-      "./rebabel_scripts/rebabel_convert",
-      [
-        "nlp_pos",
-        "flextext",
-        "/",
-        "nlp_pos.txt",
-        '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}',
-      ]
-    );
+    const { stdout, stderr } = await execFilePromisified(executableName, [
+      "nlp_pos",
+      "flextext",
+      "/",
+      "nlp_pos.txt",
+      '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}',
+    ]);
 
     if (stderr) {
       console.log(error); // This is temporary minimum error handling.
@@ -110,3 +110,16 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+function getExecutableName() {
+  //location and default name of executable
+  const dirName = "./rebabel_scripts/";
+  let executableName = "rebabel_convert";
+
+  //checks if windows
+  if (process.platform === "win32") {
+    executableName = "rebabel_convert.exe";
+  }
+
+  return dirName + executableName;
+}
