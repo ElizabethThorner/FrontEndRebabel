@@ -3,7 +3,7 @@ import sys
 import rebabel_format
 
 (script_name, inType, outType, inPath, outPath,
- nlpFileType, partOfSpeechFile, languageFile, delimiter, mappings, root, skip, tempdb_path) = sys.argv
+ nlpFileType, partOfSpeechFile, languageFile, delimiter, mappings, root, skip) = sys.argv
 
 if mappings:
     mappings = json.loads(mappings)
@@ -24,7 +24,7 @@ if inType == "nlp_pos" and nlpFileType == "separate":
     rebabel_format.run_command(
         "import",
         mode = inType,
-        db = tempdb_path,
+        db = "temp.db",
         infiles = [inPathList[langPos]],
         nlpFileType = "language"
     )
@@ -32,7 +32,7 @@ if inType == "nlp_pos" and nlpFileType == "separate":
     rebabel_format.run_command(
         "import",
         mode = inType,
-        db = tempdb_path,
+        db = "temp.db",
         infiles = [inPathList[posPos]],
         nlpFileType = "pos",
         merge_on = {
@@ -44,7 +44,7 @@ else:
     rebabel_format.run_command(
         "import",
         mode = inType,
-        db = tempdb_path,
+        db = "temp.db",
         infiles = [inPath],
         nlpFileType = "combined",
         delimiter = delimiter,
@@ -53,7 +53,7 @@ else:
 rebabel_format.run_command(
     "export",
     mode = outType,
-    db = tempdb_path,
+    db = "temp.db",
     outfile = outPath,
     mappings = [
         {'in_type': 'sentence', 'out_type': 'phrase'},
