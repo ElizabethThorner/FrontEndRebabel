@@ -7,6 +7,7 @@ import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
 import OutputFileConfig from "./OutputFileConfig.jsx";
 import errorStates from "../ErrorStates.js";
+import SelectTypes from "./SelectTypes.jsx";
 
 const initialState = {
   filePath: [],
@@ -76,29 +77,7 @@ function App() {
           errors={errors}
           setErrorState={setErrorState}
         />
-        <div className="file-type">
-          <label>File input type</label>
-          <select
-            aria-label="Select File Type"
-            name="inputType"
-            onChange={(e) => handleSelectType(e)}
-            disabled={isLoading}
-          >
-            <option defaultValue=""></option>
-            <option value="flextext">Flextext</option>
-            <option value="conllu">Conllu</option>
-            <option value="nlp_pos">NLP</option>
-          </select>
-          {data.inFileType === "nlp_pos" && (
-            <button
-              className="nlp-button"
-              disabled={isLoading}
-              onClick={() => setNLPConfigOpen(!isNLPConfigOpen)}
-            >
-              NLP Settings
-            </button>
-          )}
-        </div>
+        <SelectTypes data={data} setData={setData} isLoading={isLoading} />
         <div className="file-type">
           <label>File output type</label>
           <select

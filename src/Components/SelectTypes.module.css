@@ -1,0 +1,7 @@
+.fileType {
+  margin-top: 1rem;
+}
+
+.fileType > select {
+  width: 30%;
+}

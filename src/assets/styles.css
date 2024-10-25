@@ -24,14 +24,6 @@ header h2 {
   padding-left: 0rem;
 }
 
-.file-type {
-  margin-top: 1rem;
-}
-
-.file-type > select {
-  width: 30%;
-}
-
 label {
   font-size: 0.9rem;
   font-weight: bold;
