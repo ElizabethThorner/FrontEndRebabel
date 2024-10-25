@@ -40,12 +40,6 @@ label {
   margin-right: 1.2rem;
 }
 
-.output-button {
-  font-size: 0.8rem;
-  padding: 0.7rem;
-  margin-left: 0.7rem;
-}
-
 .inputs {
   width: 30%;
 }
@@ -53,12 +47,6 @@ label {
 .loading-status {
   font-weight: 500;
   color: #6a6a6a;
-}
-
-.nlp-button {
-  font-size: 0.8rem;
-  padding: 0.7rem;
-  margin-left: 0.7rem;
 }
 
 /* Styles for NLPConfig Component */

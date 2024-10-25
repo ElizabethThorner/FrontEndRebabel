@@ -51,18 +51,6 @@ function App() {
     }));
   }
 
-  function handleSelectType(e) {
-    if (e.target.name === "inputType") {
-      setData((data) => ({ ...data, inFileType: e.target.value }));
-
-      if (e.target.value === "nlp_pos") {
-        setNLPConfigOpen(() => !isNLPConfigOpen);
-      }
-    } else if (e.target.name === "outputType") {
-      setData((data) => ({ ...data, outFileType: e.target.value }));
-    }
-  }
-
   return (
     <div className="container flex-base">
       <header>
@@ -77,28 +65,22 @@ function App() {
           errors={errors}
           setErrorState={setErrorState}
         />
-        <SelectTypes data={data} setData={setData} isLoading={isLoading} />
-        <div className="file-type">
-          <label>File output type</label>
-          <select
-            aria-label="Select File Type"
-            name="outputType"
-            onChange={(e) => handleSelectType(e)}
-            disabled={isLoading}
-          >
-            <option defaultValue=""></option>
-            <option value="flextext">Flextext</option>
-          </select>
-          {data.outFileType === "flextext" && (
-            <button
-              className="output-button"
-              disabled={isLoading}
-              onClick={() => setOutputFileConfigOpen(true)}
-            >
-              Output File Settings
-            </button>
-          )}
-        </div>
+        <SelectTypes
+          label="File Input Type"
+          selectConfig="inputType"
+          data={data}
+          setData={setData}
+          isLoading={isLoading}
+          setNLPConfigOpen={setNLPConfigOpen}
+        />
+        <SelectTypes
+          label="File Output Type"
+          selectConfig="outputType"
+          data={data}
+          setData={setData}
+          isLoading={isLoading}
+          setOutputFileConfigOpen={setOutputFileConfigOpen}
+        />
         <div className="settings-container">
           <button onClick={() => setMappingsOpen(true)} disabled={isLoading}>
             Mappings
