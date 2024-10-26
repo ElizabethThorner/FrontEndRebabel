@@ -8,7 +8,7 @@ const About = ({ isOpen, onClose }) => {
         <p>
           Linguists rely on a variety of specialized software tools to document and preserve endangered languages.
           A common challenge they face is the need to transfer language data between different applications, a process that currently lacks an automated and user-friendly solution.
-          Gap App provides an efficient and intuitive solution for converting NLP output files into language data formats compatible with software such as Fieldworks Language Explorer (FLEx) and ELAN.
+          Rebabel provides an efficient and intuitive solution for converting NLP output files into language data formats compatible with software such as Fieldworks Language Explorer (FLEx) and ELAN.
         </p>
         <h3>Team Members:</h3>
         <ul>

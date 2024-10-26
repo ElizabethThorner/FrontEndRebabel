@@ -6,7 +6,7 @@ const Help = ({ isOpen, onClose }) => {
       <article>
         <h2>Help</h2>
         <p>
-          Welcome to Gap App! This tool is designed to simplify file format conversions with just a few clicks. Follow the steps below to quickly convert your files and customize the output to your needs.
+          Welcome to Rebabel! This tool is designed to simplify file format conversions with just a few clicks. Follow the steps below to quickly convert your files and customize the output to your needs.
         </p>
         <ol>
           <li>Select the file to be converted.</li>

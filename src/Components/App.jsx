@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="container flex-base">
       <header>
-        <h2>Gap App</h2>
+        <h2>Rebabel</h2>
       </header>
 
       <section className="input-fields">
