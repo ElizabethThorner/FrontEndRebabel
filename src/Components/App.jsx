@@ -40,13 +40,18 @@ function App() {
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
 
-  function setErrorState(errorStatus, errorMessage, propName) {
+  function setErrorState(
+    errorStatus,
+    errorMessage,
+    propName,
+    ariaStatus = undefined
+  ) {
     setErrors((errors) => ({
       ...errors,
       [propName]: {
         status: errorStatus,
         message: errorMessage,
-        ariaProps: { "aria-invalid": errorStatus },
+        ariaProps: { "aria-invalid": ariaStatus },
       },
     }));
   }
