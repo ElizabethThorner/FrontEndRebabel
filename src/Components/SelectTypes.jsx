@@ -54,6 +54,7 @@ function SelectTypes({
       >
         <option defaultValue=""></option>
         {dataFormats.map((item) => {
+          //Import
           if (
             selectConfig === "inputType" &&
             item.operations !== "export" &&
@@ -65,6 +66,7 @@ function SelectTypes({
               </option>
             );
           } else if (
+            //Export
             selectConfig === "outputType" &&
             item.operations !== "import" &&
             item.rebabelCode !== data.inFileType
