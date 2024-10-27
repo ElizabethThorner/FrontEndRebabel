@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./SelectTypes.module.css";
 
+// name - value appears in html select
+// rebabelCode - value that rebabel uses for import or export
+// operations - import, export or both.
 const dataFormats = [
   {
     name: "Flextext",
@@ -39,6 +42,8 @@ function SelectTypes({
   function handleOutputType(e) {
     setData((data) => ({ ...data, outFileType: e.target.value }));
   }
+
+  console.log(data);
   return (
     <div className={styles.fileType}>
       <label>{label}</label>
