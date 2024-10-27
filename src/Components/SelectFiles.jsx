@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./SelectFiles.module.css";
 import Chip from "./Chip.jsx";
-import Error from "./Errors.jsx";
+import Error from "./Error.jsx";
 
 function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
   useEffect(() => {

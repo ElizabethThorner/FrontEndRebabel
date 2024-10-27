@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Errors.module.css";
+import styles from "./Error.module.css";
 
 function Error({ children, customStyle = {} }) {
   return (
