@@ -1,7 +1,7 @@
 .chip {
   display: flex;
   align-items: center;
-  background-color: #df2060;
+  background-color: #c15c79;
   width: max-content;
   height: max-content;
   border-radius: 2.5rem;
@@ -10,7 +10,11 @@
 }
 
 .chip:hover {
-  background-color: #c01b52;
+  background-color: #b75772;
+}
+
+.chip:active {
+  background-color: #ac526b;
 }
 
 .text {

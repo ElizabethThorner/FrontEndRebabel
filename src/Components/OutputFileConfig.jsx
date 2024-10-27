@@ -1,7 +1,8 @@
 import React from "react";
 import Select from 'react-select';
 
-function OutputFileConfig({ isOpen, onClose, data, setData }) {
+function OutputFileConfig({ isOpen, onClose, data, setData, 
+  includedLayerValues, setIncludedLayerValues }) {
 
   const flextextOptions = [
     { value : 'interlinear-text', label: 'interlinear-text' },
@@ -11,6 +12,30 @@ function OutputFileConfig({ isOpen, onClose, data, setData }) {
     { value : 'morph', label: 'morpheme' }
   ]
 
+  function handleFlextextOptionChange(layers) {
+    const sortedLayers = layers.length > 0
+    ? layers.toSorted(
+        (a, b) => flextextOptions.findIndex(opt => opt.value === a.value) - flextextOptions.findIndex(opt => opt.value === b.value)
+      )
+    : [];
+
+    if (sortedLayers.length > 0) {
+      const rootIndex = flextextOptions.findIndex(opt => opt.value === sortedLayers[0].value);
+      const allLayersBelowRoot = flextextOptions.filter(opt1 => 
+        (flextextOptions.findIndex(opt2 => opt2 === opt1) > rootIndex)
+      );
+      const skippedLayers = allLayersBelowRoot.filter(layer => !sortedLayers.includes(layer));
+
+      setData((data) => ({ ...data, root: sortedLayers[0].value}));
+      setData((data) => ({ ...data, skip: skippedLayers.map(layer => layer.value)}));
+    } else {
+      setData((data) => ({ ...data, root: ""}));
+      setData((data) => ({ ...data, skip: []}));
+    }
+
+    setIncludedLayerValues(layers.map(layer => layer.value))
+  }
+
   return (
     <dialog open={isOpen} className="modal-overlay">
       <article>
@@ -18,40 +43,21 @@ function OutputFileConfig({ isOpen, onClose, data, setData }) {
         <hr></hr>
         <section>
         {data.outFileType === "flextext" && 
-           <>
-            <div>
-            <label>Select the highest level non-empty layer that will be used in the flextext file. Set to "phrase" by default.</label>
-            <Select
-              defaultValue={[flextextOptions[2]]}
-              value={data.root ? flextextOptions.find(option => option.value === data.root) : null}
-              maxMenuHeight={200}
-              name="root"
-              options={flextextOptions}
-              className="basic-single"
-              classNamePrefix="select"
-              isSearchable={false}
-              onChange={(choice) => setData((data) => ({ ...data, root: choice.value}))}
-              aria-label="root settings"
-            />
-
-          </div>
           <div>
-            <label>Select layers to skip, if any. Set to "morpheme" by default.</label>
+            <label>Include all layers that will be non-empty in the resulting flextext file. By default, only "phrase" and "word" are included.</label>
             <Select
-              defaultValue={[flextextOptions[4]]}
-              value={data.skip.map(skipValue => flextextOptions.find(option => option.value === skipValue)).filter(Boolean)}
-              maxMenuHeight={85}
+              defaultValue={includedLayerValues.map(value => flextextOptions.find(option => option.value === value))}             
+              maxMenuHeight={80}
               isMulti
-              name="skip"
+              name="includedLayers"
               options={flextextOptions}
               className="basic-multi-select"
               classNamePrefix="select"
               isSearchable={false}
-              onChange={(choices) => setData((data) => ({ ...data, skip: choices.map(choice => choice.value)}))}
-              aria-label="skip settings"
+              onChange={(layers) => handleFlextextOptionChange(layers)}
+              aria-label="flextext settings"
             />
-            </div>
-          </>
+          </div>
           }
         </section>
         <footer>

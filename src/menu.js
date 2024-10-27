@@ -78,7 +78,7 @@ const createMenuTemplate = (isDev) => {
         },
       },
       {
-        label: 'Rebabel Documentation',
+        label: 'Documentation',
         click: () => {
           shell.openExternal('https://github.com/mr-martian/rebabel-format/blob/master/docs/README.md');
         },
@@ -89,13 +89,16 @@ const createMenuTemplate = (isDev) => {
         click: () => {
           dialog.showMessageBox({
             type: 'info',
-            title: 'About Gap App',
-            message: 'Gap App',
-            detail: `Version: ${app.getVersion()}\n` +
+            title: 'About reBabel',
+            message: `reBabel (Version: ${app.getVersion()})`,
+            detail: `Welcome to reBabel!\n` +
                     `\n` +
-                    `Welcome to Gap App! This tool is designed to simplify file format conversions with just a few clicks. Follow the steps below to quickly convert your files and customize the output to your needs.\n` +
-                    `\n` +
-                    `Linguists rely on a variety of specialized software tools to document and preserve endangered languages. A common challenge they face is the need to transfer language data between different applications, a process that currently lacks an automated and user-friendly solution. Gap App provides an efficient and intuitive solution for converting NLP output files into language data formats compatible with software such as Fieldworks Language Explorer (FLEx) and ELAN.\n` +
+                    `This tool is designed to simplify file format conversions between various language data files. ` +
+                    `reBabel currently supports conversions between the following formats: \n` +
+                    `- ELAN (.eaf)\n` +
+                    `- Fieldworks Language Explorer (.flextext)\n` +
+                    `- Universal Dependencies (.conllu)\n` +
+                    `- Natural Language Processing (.txt)\n` +
                     `\n` +
                     `Team Members:\n` +
                     `- Joseph Barron: Backend Developer/Scrum Master\n` +

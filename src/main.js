@@ -6,6 +6,7 @@ const execFilePromisified = util.promisify(
   require("node:child_process").execFile
 );
 const createMenuTemplate = require("./menu");
+const fs = require('fs');
 
 const isDev = !app.isPackaged;
 
@@ -22,7 +23,7 @@ if (require("electron-squirrel-startup")) {
 }
 
 const createWindow = () => {
-  // Create the browser window.
+  // Create browser window.
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 800,
@@ -32,16 +33,12 @@ const createWindow = () => {
     },
   });
 
-  // and load the index.html of the app.
+  // Load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  // menubar
+  // Create and set menu bar
   const menuTemplate = createMenuTemplate(isDev);
-
-  // Build the menu from the template
   const menu = Menu.buildFromTemplate(menuTemplate);
-
-  // Set the menu for the application
   Menu.setApplicationMenu(menu);
 };
 
@@ -50,6 +47,24 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+
+  // get paths
+  rebabelConvertPath = 'resources/rebabel_convert';
+  tempdbPath = 'resources/temp.db';
+  if (isDev) {
+    rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
+    tempdbPath = 'temp.db';
+  }
+
+  // clear database if it exists before app starts
+  if (fs.existsSync(tempdbPath)) {
+    try {
+      fs.unlinkSync(tempdbPath);
+      console.log('previous database cleared');
+    } catch (err) {
+      console.error('error clearing previous database:', err);
+    }
+  }
 
   ipcMain.handle("selectFile", async () => {
     const filePathSelect = dialog.showOpenDialogSync({
@@ -78,11 +93,12 @@ app.whenReady().then(() => {
       outPutFileNamePath = initiateSaveAs(data);
     }
 
-    //user cancels
+    //user cancels saveAs
     if (outPutFileNamePath === "cancelled") {
       return "cancelled";
     }
 
+    // get arguments from input forms
     const {
       filePath,
       fileName,
@@ -96,10 +112,6 @@ app.whenReady().then(() => {
       root,
       skip,
     } = data;
-
-    // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
-    const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
-    const tempdbPath = path.join(process.resourcesPath, 'temp.db');
 
     const { stdout, stderr } = await execFilePromisified(
       rebabelConvertPath,

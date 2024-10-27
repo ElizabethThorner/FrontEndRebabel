@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  margin-top: 1.8rem;
+  padding-top: 1.8rem;
 }
 
 header {
@@ -17,6 +17,26 @@ header h2 {
   margin: 0 20px;
   font-size: 4rem;
   font-weight: bold;
+  color: white;
+}
+
+body {
+  background: linear-gradient(to bottom, #525252, #2c4b70);
+  height: 100vh;
+  margin: 0;
+}
+
+button {
+  background-color: #407fc7;
+  border: none;
+}
+
+button:hover {
+  background-color: #3A7AB3;
+}
+
+button:active {
+  background-color: #2C5D8A;
 }
 
 .input-fields {
@@ -27,6 +47,11 @@ header h2 {
 label {
   font-size: 0.9rem;
   font-weight: bold;
+  color: white;
+}
+
+.modal-overlay label {
+  color: black;
 }
 
 .settings-container {
