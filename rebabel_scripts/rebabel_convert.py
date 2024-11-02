@@ -14,42 +14,50 @@ rebabel_format.load_readers(True)
 rebabel_format.load_writers(True)
 rebabel_format.get_process_parameters("export")
 
-if inType == "nlp_pos" and additionalArguments["nlpFileType"] == "separate":
-    inPathList = inPath.split(',')
-    langPos = 0
-    posPos = 1
-    if additionalArguments["languageFile"] in inPathList[1] and additionalArguments["partOfSpeechFile"] in inPathList[0]:
-        langPos = 1
-        posPos = 0
-    
-    rebabel_format.run_command(
-        "import",
-        mode = inType,
-        db = tempdb_path,
-        infiles = [inPathList[langPos]],
-        nlpFileType = "language"
-    )
-    
-    rebabel_format.run_command(
-        "import",
-        mode = inType,
-        db = tempdb_path,
-        infiles = [inPathList[posPos]],
-        nlpFileType = "pos",
-        merge_on = {
-            'sentence': 'meta:index',
-            'word': 'meta:index'
-        }
-    )
+if inType == "nlp_pos":
+    if additionalArguments["nlpFileType"] == "separate":
+        inPathList = inPath.split(',')
+        langPos = 0
+        posPos = 1
+        if additionalArguments["languageFile"] in inPathList[1] and additionalArguments["partOfSpeechFile"] in inPathList[0]:
+            langPos = 1
+            posPos = 0
+        
+        rebabel_format.run_command(
+            "import",
+            mode = inType,
+            db = tempdb_path,
+            infiles = [inPathList[langPos]],
+            nlpFileType = "language"
+        )
+        
+        rebabel_format.run_command(
+            "import",
+            mode = inType,
+            db = tempdb_path,
+            infiles = [inPathList[posPos]],
+            nlpFileType = "pos",
+            merge_on = {
+                'sentence': 'meta:index',
+                'word': 'meta:index'
+            }
+        )
+    else:
+        rebabel_format.run_command(
+            "import",
+            mode = inType,
+            db = tempdb_path,
+            infiles = [inPath],
+            nlpFileType = "combined",
+            delimiter = additionalArguments["nlpDelimiter"]
+        )
 else:
     rebabel_format.run_command(
-        "import",
-        mode = inType,
-        db = tempdb_path,
-        infiles = [inPath],
-        nlpFileType = "combined",
-        delimiter = additionalArguments["delimiter"]
-    )
+            "import",
+            mode = inType,
+            db = tempdb_path,
+            infiles = [inPath]
+        )
 
 if (outType == "flextext"):
     if (additionalArguments["skip"] == []):
@@ -71,3 +79,12 @@ if (outType == "flextext"):
             root = additionalArguments["root"],
             skip = additionalArguments["skip"]
         )
+else:
+    rebabel_format.run_command(
+            "export",
+            mode = outType,
+            db = tempdb_path,
+            outfile = outPath,
+            mappings = mappings[0] + mappings[1]
+        )
+    

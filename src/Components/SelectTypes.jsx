@@ -9,18 +9,33 @@ const dataFormats = [
   {
     name: "Flextext",
     rebabelCode: "flextext",
-    operations: "both",
+    operations: "both"
   },
   {
     name: "Conllu",
     rebabelCode: "conllu",
-    operations: "import",
+    operations: "both"
   },
   {
     name: "NLP",
     rebabelCode: "nlp_pos",
-    operations: "import",
+    operations: "import"
   },
+  {
+    name: "ELAN",
+    rebabelCode: "elan",
+    operations: "import"
+  },
+  {
+    name: "Macula",
+    rebabelCode: "macula-node",
+    operations: "import"
+  },
+  {
+    name: "SFM",
+    rebabelCode: "sfm",
+    operations: "import"
+  }
 ];
 
 function SelectTypes({

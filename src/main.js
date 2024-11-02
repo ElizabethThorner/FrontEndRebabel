@@ -84,8 +84,7 @@ app.whenReady().then(() => {
             "eaf",
             "conllu",
             "sfm",
-            "tf",
-            "xml",
+            "xml"
           ],
         },
       ],

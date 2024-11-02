@@ -18,7 +18,7 @@ const errorStates = {
     message: "",
     ariaProps: { "aria-invalid": undefined },
   },
-  delimiter: {
+  nlpDelimiter: {
     status: false,
     message: "",
     ariaProps: { "aria-invalid": undefined },
@@ -37,6 +37,10 @@ const errorStates = {
     status: false,
     message: "",
   },
+  mappings: {
+    status: false,
+    message: ""
+  }
 };
 
 export default errorStates;

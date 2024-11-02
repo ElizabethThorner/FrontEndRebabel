@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Error from "./Error.jsx";
 
-function Mappings({ isOpen, onClose, data, setData }) {
+function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   const [isAddTypeMappingOpen, setAddTypeMappingOpen] = useState(false);
   const [isAddFeatureMappingOpen, setAddFeatureMappingOpen] = useState(false);
   const [inType, setInType] = useState("");
@@ -23,16 +24,25 @@ function Mappings({ isOpen, onClose, data, setData }) {
   function handleRemoveMapping(mappingTypeIndex, mappingIndex) {
     const newMappings = data.mappings[mappingTypeIndex].filter((_, i) => i !== mappingIndex);
     data.mappings[mappingTypeIndex] = newMappings;
+    if ((data.mappings[0].length === 0) && (data.mappings[1].length === 0)) {
+      setErrorState(true, "Mappings must be provided", "mappings");
+    }
     setData((data) => ({ ...data }));
   }
 
-  function resetTypeDialog() {
+  function resetTypeDialog(isSubmit) {
+    if (isSubmit) {
+      setErrorState(false, "", "mappings");
+    }
     setAddTypeMappingOpen(false);
     setInType("");
     setOutType("");
   }
 
-  function resetFeatureDialog() {
+  function resetFeatureDialog(isSubmit) {
+    if (isSubmit) {
+      setErrorState(false, "", "mappings");
+    }
     setAddFeatureMappingOpen(false);
     setInFeature("");
     setOutFeature("");
@@ -82,8 +92,8 @@ function Mappings({ isOpen, onClose, data, setData }) {
         </div>
       </div>
       <footer>
-          <button onClick={() => data.mappings[0].push({in_type: inType, out_type: outType}) && resetTypeDialog()}>Submit</button>
-          <button onClick={() => resetTypeDialog()}>Cancel</button>
+          <button onClick={() => data.mappings[0].push({in_type: inType, out_type: outType}) && resetTypeDialog(true)}>Submit</button>
+          <button onClick={() => resetTypeDialog(false)}>Cancel</button>
       </footer>
     </article>
   </dialog>
@@ -114,8 +124,8 @@ function Mappings({ isOpen, onClose, data, setData }) {
         </div>
       </div>
       <footer>
-        <button onClick={() => data.mappings[1].push({in_feature: inFeature, out_feature: outFeature}) && resetFeatureDialog()}>Submit</button>
-        <button onClick={() => resetFeatureDialog()}>Cancel</button>
+        <button onClick={() => data.mappings[1].push({in_feature: inFeature, out_feature: outFeature}) && resetFeatureDialog(true)}>Submit</button>
+        <button onClick={() => resetFeatureDialog(false)}>Cancel</button>
       </footer>
     </article>
   </dialog>
@@ -152,6 +162,7 @@ function Mappings({ isOpen, onClose, data, setData }) {
               {featureDialog}
             </div>
           </div>
+          <Error>{errors.mappings.message}</Error>
         </section>
         <footer>
           <button onClick={onClose}>Close</button>

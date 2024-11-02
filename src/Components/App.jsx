@@ -17,7 +17,7 @@ const initialState = {
   additionalArguments: {
     root: "phrase", 
     skip: ["morph"], 
-    delimiter: "/"
+    nlpDelimiter: "/"
   }
 };
 
@@ -112,6 +112,7 @@ function App() {
           setErrorState={setErrorState}
           setDisplayResultsOpen={setDisplayResultsOpen}
           setConversionResult={setConversionResult}
+          setMappingsOpen={setMappingsOpen}
         />
       </section>
       {/* Dialog component */}
@@ -121,6 +122,8 @@ function App() {
           onClose={() => setMappingsOpen(!isMappingsOpen)}
           data={data}
           setData={setData}
+          errors={errors}
+          setErrorState={setErrorState}
         />
       )}
       {isNLPConfigOpen && (

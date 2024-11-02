@@ -14,19 +14,19 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
   }
 
   function handleDelimiterChange(e) {
-    data.additionalArguments.delimiter = e.target.value;
+    data.additionalArguments.nlpDelimiter = e.target.value;
 
     if (e.target.value.length > 1) {
       setErrorState(
         true,
         "Delimiter can only be a single character",
-        "delimiter",
+        "nlpDelimiter",
         true
       );
     } else if (e.target.value === "") {
-      setErrorState(true, "Enter a delimiter value", "delimiter", true);
+      setErrorState(true, "Enter a delimiter value", "nlpDelimiter", true);
     } else {
-      setErrorState(false, "", "delimiter");
+      setErrorState(false, "", "nlpDelimiter");
     }
   }
 
@@ -97,11 +97,11 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
                 <input
                   type="text"
                   id="delimiter"
-                  value={data.additionalArguments.delimiter}
+                  value={data.additionalArguments.nlpDelimiter}
                   onChange={(e) => handleDelimiterChange(e)}
-                  {...errors.delimiter.ariaProps}
+                  {...errors.nlpDelimiter.ariaProps}
                 />
-                <Error>{errors.delimiter.message}</Error>
+                <Error>{errors.nlpDelimiter.message}</Error>
               </div>
             </>
           )}
