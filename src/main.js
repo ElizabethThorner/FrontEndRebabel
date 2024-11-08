@@ -21,6 +21,22 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
+const createHelpWindow = () => {
+  const mainWindow = new BrowserWindow({
+    width: 900,
+    height: 800,
+    resizable: true,
+    minWidth: 900,
+    minHeight: 768,
+    icon: "src/icon.png",
+  });
+
+  //Path will probably need dev/production set
+  //Not sure about the pico css stuff, maybe copy into folder
+  mainWindow.loadFile("./src/HelpDocumentation/helpDocumentation.html");
+  mainWindow.setMenu(null);
+};
+
 const createWindow = () => {
   // Create browser window.
   const mainWindow = new BrowserWindow({
@@ -35,11 +51,18 @@ const createWindow = () => {
     },
   });
 
+  mainWindow.on("close", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
+  });
+
   // Load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Create and set menu bar
   const menuTemplate = createMenuTemplate(isDev);
+  insertHelpWindow(menuTemplate);
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 };
@@ -129,14 +152,8 @@ app.whenReady().then(() => {
     }
 
     // get arguments from input forms
-    const {
-      filePath,
-      fileName,
-      inFileType,
-      outFileType,
-      mappings,
-      additionalArguments,
-    } = data;
+    const { filePath, inFileType, outFileType, mappings, additionalArguments } =
+      data;
 
     let buffer = "";
     try {
@@ -225,4 +242,20 @@ function cleanErrorMessage(error) {
   const beginOfBrackets = errorString.indexOf("[", beginOfValueError);
 
   return errorString.substring(beginOfValueError, beginOfBrackets);
+}
+
+function insertHelpWindow(menuTemplate) {
+  for (let item in menuTemplate) {
+    //Help Entry in Menu bar
+    if (menuTemplate[item].label === "Help") {
+      for (let index in menuTemplate[item].submenu) {
+        //Help entry in Help drop down
+        if (menuTemplate[item].submenu[index].label === "Help") {
+          menuTemplate[item].submenu[index].click = () => {
+            createHelpWindow();
+          };
+        }
+      }
+    }
+  }
 }

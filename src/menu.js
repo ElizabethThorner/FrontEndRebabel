@@ -1,24 +1,5 @@
 const { BrowserWindow, app, dialog, shell } = require("electron");
 
-const createHelpWindow = () => {
-  const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 800,
-    resizable: true,
-    minWidth: 900,
-    minHeight: 768,
-    icon: "src/icon.png",
-  });
-
-  //Path will probably need dev/production set
-  //Not sure about the pico css stuff, maybe copy into folder
-  mainWindow.loadFile("./src/HelpDocumentation/helpDocumentation.html");
-
-  mainWindow.setMenu(null);
-
-  return mainWindow;
-};
-
 //menu elements that are created when app run in development mode
 const getDevMenu = (isDev) => {
   if (!isDev) return [];
@@ -138,9 +119,7 @@ const createMenuTemplate = (isDev) => {
         { type: "separator" },
         {
           label: "Help",
-          click: () => {
-            createHelpWindow();
-          },
+          click: "",
         },
         {
           label: "About",
