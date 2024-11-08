@@ -1,18 +1,7 @@
-const {
-  app,
-  Menu,
-  BrowserWindow,
-  ipcMain,
-  dialog,
-  shell,
-} = require("electron");
+const { app, Menu, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("node:path");
 const { unlink } = require("node:fs");
 const { execFileSync } = require("node:child_process");
-const util = require("node:util");
-const execFilePromisified = util.promisify(
-  require("node:child_process").execFile
-);
 const createMenuTemplate = require("./menu");
 const fs = require("fs");
 
@@ -40,7 +29,7 @@ const createWindow = () => {
     resizable: true,
     minWidth: 900,
     minHeight: 768,
-    icon: 'src/icon.png',
+    icon: "src/icon.png",
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -90,11 +79,11 @@ app.whenReady().then(() => {
               "eaf",
               "conllu",
               "sfm",
-              "xml"
+              "xml",
             ],
           },
         ],
-        properties: ["openFile"]
+        properties: ["openFile"],
       });
     } else {
       filePathSelect = dialog.showOpenDialogSync({
@@ -104,7 +93,7 @@ app.whenReady().then(() => {
             extensions: ["etf"],
           },
         ],
-        properties: ["openFile"]
+        properties: ["openFile"],
       });
     }
 
@@ -124,7 +113,7 @@ app.whenReady().then(() => {
 
     let returnData = {
       success: false,
-      message: "An unexpected error occurred!"
+      message: "An unexpected error occurred!",
     };
 
     //calls saveAs dialog if fileName and output file type aren't empty
