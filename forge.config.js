@@ -30,19 +30,6 @@ module.exports = {
       }
     }
   ],
-  publishers: [
-    {
-      name: '@electron-forge/publisher-github',
-      config: {
-        repository: {
-          owner: 'ElizabethThorner',
-          name: 'FrontEndRebabel'
-        },
-        force: true,
-        prerelease: true,
-      }
-    }
-  ],
   plugins: [
     {
       name: '@electron-forge/plugin-auto-unpack-natives',
