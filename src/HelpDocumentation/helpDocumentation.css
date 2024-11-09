@@ -2,3 +2,11 @@ header {
   display: flex;
   justify-content: center;
 }
+
+table {
+  width: fit-content;
+}
+
+td {
+  text-align: center;
+}

@@ -20,14 +20,82 @@
     <main class="container">
       <header><h1>reBabel Help</h1></header>
       <section>
-        <h4>Importing</h4>
+        <h3>Importing</h3>
         <div>
           <p>There are currently six file types supported for importing.</p>
-          <ul>
-            <li>Flextext (.flextext)</li>
-            <li>Conllu (.conllu)</li>
-          </ul>
+          <table class="striped">
+            <thead>
+              <tr>
+                <th scope="col">File Type</th>
+                <th scope="col">Supported File Extension</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Flextext</td>
+                <td>.flextext</td>
+              </tr>
+              <tr>
+                <td>Conllu</td>
+                <td>.conllu</td>
+              </tr>
+              <tr>
+                <td>NLP</td>
+                <td>.txt</td>
+              </tr>
+              <tr>
+                <td>ELAN</td>
+                <td>.elan</td>
+              </tr>
+              <tr>
+                <td>SFM</td>
+                <td>.sfm</td>
+              </tr>
+              <tr>
+                <td>Macula</td>
+                <td>.xml</td>
+              </tr>
+            </tbody>
+          </table>
+          <h6>NLP Files</h6>
+          <p>
+            NLP file types have additional input parameters based on whether
+            they are a combined NLP file or a separate NLP file.
+          </p>
+          <p>
+            A combined NLP file has a input parameter for a delimiter. The
+            delimiter by default is / and so a file using the default delimiter
+            would be represented as
+          </p>
+          <blockquote>The/DET dog/NOUN barks/VERB ./PUNC</blockquote>
         </div>
+      </section>
+      <section>
+        <h3>Exporting</h3>
+        <div></div>
+        <p>There are currently three file types supported for exporting.</p>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th scope="col">File Type</th>
+              <th scope="col">Supported File Extension</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Flextext</td>
+              <td>.flextext</td>
+            </tr>
+            <tr>
+              <td>Conllu</td>
+              <td>.conllu</td>
+            </tr>
+            <tr>
+              <td>ELAN</td>
+              <td>.elan</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </main>
   </body>

@@ -119,6 +119,7 @@ const createMenuTemplate = (isDev) => {
         { type: "separator" },
         {
           label: "Help",
+          accelerator: "CmdOrCtrl+H",
           click: "",
         },
         {
