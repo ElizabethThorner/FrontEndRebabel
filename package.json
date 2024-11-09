@@ -1,7 +1,7 @@
 {
-  "name": "frontendrebabel",
-  "productName": "frontendrebabel",
-  "version": "1.0.0",
+  "name": "rebabel",
+  "productName": "rebabel",
+  "version": "0.0.0",
   "description": "Front End for the reBabel program",
   "main": ".webpack/main",
   "scripts": {
