@@ -40,8 +40,6 @@ const createHelpWindow = () => {
     );
   }
 
-  //Path will probably need dev/production set
-  //Not sure about the pico css stuff, maybe copy into folder
   mainWindow.loadFile(filePath);
   mainWindow.setMenu(null);
 };
