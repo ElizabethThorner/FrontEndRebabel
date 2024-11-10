@@ -1,9 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SelectFiles.module.css";
 import Chip from "./Chip.jsx";
 import Error from "./Error.jsx";
 
-function SelectFiles({ data, isLoading, setData, errors, setErrorState, fileTypeExtensions }) {
+function SelectFiles({
+  data,
+  isLoading,
+  setData,
+  errors,
+  setErrorState,
+  fileTypeExtensions,
+}) {
+  const [isSelecting, setSelecting] = useState(false);
   const errorColor = "#FFBF00";
 
   useEffect(() => {
@@ -11,9 +19,10 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState, fileType
   }, [data.fileName]);
 
   async function handleSelectFile() {
+    setSelecting(true);
     //returns object with filePath and fileName
     const response = await window.pythonApi.getFile(true);
-
+    setSelecting(false);
     if (response !== undefined) {
       //loops through checking to see if file name already exists
       //throws an error if true
@@ -26,8 +35,15 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState, fileType
 
       if (data.inFileType) {
         for (let path of response.filePath) {
-          if (path.toString().split(".")[1] !== fileTypeExtensions[data.inFileType]) {
-            setErrorState(true, "File extension must match input type", "selectFile");
+          if (
+            path.toString().split(".")[1] !==
+            fileTypeExtensions[data.inFileType]
+          ) {
+            setErrorState(
+              true,
+              "File extension must match input type",
+              "selectFile"
+            );
             return;
           }
         }
@@ -74,7 +90,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState, fileType
           className={styles.btn}
           id="file-in-btn"
           onClick={() => handleSelectFile()}
-          disabled={isLoading}
+          disabled={isLoading || isSelecting}
         >
           Browse
         </button>

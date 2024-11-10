@@ -3,8 +3,8 @@
     - clone the repository from GitHub
         - `git clone https://github.com/ElizabethThorner/FrontEndRebabel.git`
     - run `npm install` to install the Node packages reBabel depends on 
-    - follow the instructions in **rebabel_scripts/README.md** to generate the rebabel_convert executable
-    - alternatively, run `npm run rebabel_convert` to generate the rebabel_convert executable
+    - run `npm run rebabel_convert` to generate the rebabel_convert executable
+        - alternatively, follow the instructions in **rebabel_scripts/README.md** to generate the rebabel_convert executable manually
     - run `npm run start` to start the application in development mode 
 
 # reBabel Distributable Installation 

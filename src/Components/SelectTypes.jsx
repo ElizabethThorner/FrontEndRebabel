@@ -98,6 +98,10 @@ function SelectTypes({
       return;
     }
 
+    if ((e.target.value === "flextext") || (e.target.value === "elan")) {
+      setOutputFileConfigOpen(true);
+    }
+
     setErrorState(false, "", "outFileType");
   }
 

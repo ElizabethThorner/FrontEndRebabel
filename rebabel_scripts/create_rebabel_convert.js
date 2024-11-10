@@ -13,7 +13,7 @@ const specPath = path.join(__dirname, 'rebabel_convert.spec');
 const deleteIfExists = (path) => {
     if (fs.existsSync(path)) {
         if (fs.lstatSync(path).isDirectory()) {
-            fs.rmdirSync(path, { recursive: true });
+            fs.rmSync(path, { recursive: true });
             console.log(`Deleted directory: ${path}`);
         } else {
             fs.unlinkSync(path);

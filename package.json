@@ -1,14 +1,13 @@
 {
-  "name": "frontendrebabel",
-  "productName": "frontendrebabel",
-  "version": "1.0.0",
+  "name": "rebabel",
+  "productName": "rebabel",
+  "version": "0.0.0",
   "description": "Front End for the reBabel program",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
     "test": "wdio run ./wdio.conf.js",
     "test:build_agent": "wdio run ./wdio.conf_build_agent.js",

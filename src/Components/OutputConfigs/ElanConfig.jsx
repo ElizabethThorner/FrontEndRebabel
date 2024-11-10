@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Chip from "../Chip.jsx";
 import Error from "../Error.jsx";
 import styles from "./ElanConfig.module.css";
@@ -9,8 +9,9 @@ function ElanConfig({
   errors,
   setErrorState,
   elanTemplateFileName,
-  setElanTemplateFileName
+  setElanTemplateFileName,
 }) {
+  const [isSelecting, setSelecting] = useState(false);
   async function handleSelectFile() {
     //Pre dialog check
     if (elanTemplateFileName.length === 1) {
@@ -22,8 +23,10 @@ function ElanConfig({
       return;
     }
 
+    setSelecting(true);
     //returns object with filePath and fileName
     const response = await window.pythonApi.getFile(false);
+    setSelecting(false);
 
     if (response !== undefined) {
       data.additionalArguments.templateFile = response.filePath;
@@ -52,6 +55,7 @@ function ElanConfig({
           className={styles.btn}
           id="file-in-btn"
           onClick={() => handleSelectFile()}
+          disabled={isSelecting}
         >
           Browse
         </button>
