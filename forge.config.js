@@ -1,66 +1,71 @@
-const { FusesPlugin } = require('@electron-forge/plugin-fuses');
-const { FuseV1Options, FuseVersion } = require('@electron/fuses');
-const isWindows = process.platform === 'win32';
+const { FusesPlugin } = require("@electron-forge/plugin-fuses");
+const { FuseV1Options, FuseVersion } = require("@electron/fuses");
+const isWindows = process.platform === "win32";
 
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: 'src/icon',
-    extraResource: [isWindows ? "./rebabel_scripts/dist/rebabel_convert.exe" : "./rebabel_scripts/dist/rebabel_convert"]
+    icon: "src/icon",
+    extraResource: [
+      isWindows
+        ? "./rebabel_scripts/dist/rebabel_convert.exe"
+        : "./rebabel_scripts/dist/rebabel_convert",
+      "./src/HelpDocumentation",
+    ],
   },
   rebuildConfig: {},
   makers: [
     {
-      platforms: ['darwin'],
-      name: '@electron-forge/maker-zip'
+      platforms: ["darwin"],
+      name: "@electron-forge/maker-zip",
     },
     {
-      name: '@electron-forge/maker-squirrel',
+      name: "@electron-forge/maker-squirrel",
       config: {
-        setupIcon: 'src/icon.ico'
-      }
+        setupIcon: "src/icon.ico",
+      },
     },
     {
-      platforms: ['linux'],
-      name: '@electron-forge/maker-deb',
+      platforms: ["linux"],
+      name: "@electron-forge/maker-deb",
       config: {
         options: {
-          icon: 'src/icon.png'
-        }
-      }
-    }
+          icon: "src/icon.png",
+        },
+      },
+    },
   ],
   publishers: [
     {
-      name: '@electron-forge/publisher-github',
+      name: "@electron-forge/publisher-github",
       config: {
         repository: {
-          owner: 'ElizabethThorner',
-          name: 'FrontEndRebabel'
+          owner: "ElizabethThorner",
+          name: "FrontEndRebabel",
         },
         force: true,
         prerelease: true,
-      }
-    }
+      },
+    },
   ],
   plugins: [
     {
-      name: '@electron-forge/plugin-auto-unpack-natives',
+      name: "@electron-forge/plugin-auto-unpack-natives",
       config: {},
     },
     {
-      name: '@electron-forge/plugin-webpack',
+      name: "@electron-forge/plugin-webpack",
       config: {
-        mainConfig: './webpack.main.config.js',
+        mainConfig: "./webpack.main.config.js",
         renderer: {
-          config: './webpack.renderer.config.js',
+          config: "./webpack.renderer.config.js",
           entryPoints: [
             {
-              html: './src/index.html',
-              js: './src/renderer.js',
-              name: 'main_window',
+              html: "./src/index.html",
+              js: "./src/renderer.js",
+              name: "main_window",
               preload: {
-                js: './src/preload.js',
+                js: "./src/preload.js",
               },
             },
           ],
@@ -79,4 +84,4 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
-}
+};

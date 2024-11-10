@@ -12,7 +12,7 @@
       content="default-src 'self' data:; script-src 'self'"
     />
     <meta name="color-scheme" content="light dark" />
-    <link rel="stylesheet" href="../assets/pico.blue.min.css" />
+    <link rel="stylesheet" href="pico.min.css" />
     <link rel="stylesheet" href="helpDocumentation.css" />
     <title>reBabel Help</title>
   </head>
@@ -20,7 +20,7 @@
     <main class="container">
       <header><h1>reBabel Help</h1></header>
       <section>
-        <h3>Importing</h3>
+        <h2>Importing</h2>
         <div>
           <p>There are currently six file types supported for importing.</p>
           <table class="striped">
@@ -57,22 +57,27 @@
               </tr>
             </tbody>
           </table>
-          <h6>NLP Files</h6>
+          <h4>NLP Files</h4>
           <p>
             NLP file types have additional input parameters based on whether
-            they are a combined NLP file or a separate NLP file.
+            they are a combined NLP file or separate NLP files.
           </p>
+          <h6>Combined NLP Files</h6>
           <p>
             A combined NLP file has a input parameter for a delimiter. The
             delimiter by default is / and so a file using the default delimiter
             would be represented as
           </p>
           <blockquote>The/DET dog/NOUN barks/VERB ./PUNC</blockquote>
+          <h6>Separate NLP File</h6>
+          <p>
+            Separate NLP files consist of a part of speech file and a language
+            file.
+          </p>
         </div>
       </section>
       <section>
-        <h3>Exporting</h3>
-        <div></div>
+        <h2>Exporting</h2>
         <p>There are currently three file types supported for exporting.</p>
         <table class="striped">
           <thead>
@@ -96,6 +101,10 @@
             </tr>
           </tbody>
         </table>
+      </section>
+      <section>
+        <h2>Mappings</h2>
+        <p>Mappings info here</p>
       </section>
     </main>
   </body>

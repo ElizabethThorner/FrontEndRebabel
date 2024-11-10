@@ -31,9 +31,18 @@ const createHelpWindow = () => {
     icon: "src/icon.png",
   });
 
+  let filePath = "./src/HelpDocumentation/helpDocumentation.html";
+
+  if (!isDev) {
+    filePath = path.join(
+      process.resourcesPath,
+      "HelpDocumentation/helpDocumentation.html"
+    );
+  }
+
   //Path will probably need dev/production set
   //Not sure about the pico css stuff, maybe copy into folder
-  mainWindow.loadFile("./src/HelpDocumentation/helpDocumentation.html");
+  mainWindow.loadFile(filePath);
   mainWindow.setMenu(null);
 };
 
