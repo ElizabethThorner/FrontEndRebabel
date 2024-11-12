@@ -20,7 +20,7 @@ jobs:
           ssh-key: ${{ secrets.DEPLOY_KEY }}
       - uses: actions/setup-node@master
         with:
-          node-version: "latest"
+          node-version: "18"
       - name: Setup Git Credentials
         uses: fregante/setup-git-user@v2
       - id: step4
@@ -40,7 +40,7 @@ jobs:
           ref: main
       - uses: actions/setup-node@master
         with:
-          node-version: "latest"
+          node-version: "18"
       - name: Install Node Dependencies for reBabel
         run: npm install
       - name: Create rebabel_convert Executable Using PyInstaller
@@ -61,7 +61,7 @@ jobs:
           ref: main
       - uses: actions/setup-node@master
         with:
-          node-version: "latest"
+          node-version: "18"
       - name: Install Node Dependencies for reBabel
         run: npm install
       - name: Create rebabel_convert Executable Using PyInstaller
@@ -82,7 +82,7 @@ jobs:
           ref: main
       - uses: actions/setup-node@master
         with:
-          node-version: "latest"
+          node-version: "18"
       - name: Install Node Dependencies for reBabel
         run: npm install
       - name: Create rebabel_convert Executable Using PyInstaller
@@ -110,7 +110,7 @@ jobs:
           ref: main
       - uses: actions/setup-node@master
         with:
-          node-version: "latest"
+          node-version: "18"
       - name: Download Mac x64 Artifact
         uses: actions/download-artifact@v4
         with:
