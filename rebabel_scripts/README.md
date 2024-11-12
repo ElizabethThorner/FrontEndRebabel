@@ -9,7 +9,7 @@
         - `.venv\Scripts\activate.bat`(Command Prompt) or `.venv\Scripts\Activate.ps1`(PowerShell)
 3. Run `pip install -r requirements.txt`
 4. Run `python -m PyInstaller --onefile --collect-all rebabel_format rebabel_convert.py`
-5. The generated executable (rebabel_convert) will be located in **rebabel_scripts/dist**. To run the application in development mode (i.e., npm run start), copy the rebabel_convert executable into the following location:
+5. The generated executable (rebabel_convert) will be located in **rebabel_scripts/dist**. To run the application in development mode, copy the rebabel_convert executable into the following location:
     - macOS
         - **node_modules/electron/dist/Electron.app/Contents/Resources**
     - Windows/Linux
