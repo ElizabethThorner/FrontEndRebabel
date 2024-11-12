@@ -68,20 +68,7 @@ function deleteIfExists (path) {
 function executeScript(scriptPath, scriptName, onSuccess) {
     // powershell vs bash
     const shell = isWindows ? 'powershell.exe' : 'bash';
-    const shellArgs = isWindows
-        ? ['-ExecutionPolicy', 'Bypass', '-File', scriptPath]
-        : ['-c', scriptPath];
-
-    // grant script permissions for bash scripts
-    if (!isWindows) {
-        try {
-            execSync(`chmod +x ${scriptPath}`);
-            console.log(`Granted permissions for: ${scriptPath}`);
-        } catch (error) {
-            console.error(`Failed to grant permissions: ${error.message}`);
-            return;
-        }
-    }
+    const shellArgs = isWindows ? ['-ExecutionPolicy', 'Bypass', '-File', scriptPath] : ['-c', scriptPath];
 
     console.log(`Executing ${scriptName}...`);
     const process = spawn(shell, shellArgs);
