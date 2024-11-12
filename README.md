@@ -1,4 +1,4 @@
-# Steps for Running reBabel in Development Mode
+# Steps for running reBabel in development mode
 1. Clone the repository from GitHub:
     - `git clone https://github.com/ElizabethThorner/FrontEndRebabel.git`
 2. Install the necessary Node.js packages for reBabel:
