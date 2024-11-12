@@ -4,13 +4,55 @@ const path = require('path');
 const isWindows = process.platform === 'win32';
 const isMac = process.platform === 'darwin';
 
-//delete previous build files
-const venvPath = path.join(__dirname, '.venv');
-const buildPath = path.join(__dirname, 'build');
-const distPath = path.join(__dirname, 'dist');
-const specPath = path.join(__dirname, 'rebabel_convert.spec');
+// delete previous build files
+deleteIfExists(path.join('rebabel_scripts', 'build'));
+deleteIfExists(path.join('rebabel_scripts', 'dist'));
+deleteIfExists(path.join('rebabel_scripts', 'rebabel_convert.spec'));
 
-const deleteIfExists = (path) => {
+// define script paths
+const setupVenvPath = path.join('rebabel_scripts', isWindows ? 'setup_venv.ps1' : 'setup_venv');
+const setupExecutablePath = path.join('rebabel_scripts', isWindows ? 'setup_executable.ps1' : 'setup_executable');
+
+// define source and destination for created executable
+const sourcePath = path.join('rebabel_scripts', 'dist', isWindows ? 'rebabel_convert.exe' : 'rebabel_convert');
+const destinationPath = path.join('node_modules', 'electron', 'dist',
+    isMac ? 'Electron.app/Contents/Resources' : 'resources', // on mac, the destination is different
+    isWindows ? 'rebabel_convert.exe' : 'rebabel_convert' // on windows, add .exe extension
+);
+
+// create virtual environment if needed, then create executable
+if (!fs.existsSync(path.join('rebabel_scripts', '.venv'))) {
+    console.log('No virtual environment detected...');
+    executeScript(setupVenvPath, 'setup_venv', () => {
+        // run setup_executable after setup_venv completes
+        executeScript(setupExecutablePath, 'setup_executable', () => {
+            // copy executable to the correct location after setup_executable completes
+            fs.copyFile(sourcePath, destinationPath, (err) => {
+                if (err) {
+                    console.error(`Error copying rebabel_convert: ${err.message}`);
+                } else {
+                    console.log('rebabel_convert copied successfully');
+                }
+            });
+        });
+    });
+} else {
+    console.log('Virtual environment detected, skipping setup_venv.');
+    executeScript(setupExecutablePath, 'setup_executable', () => {
+        // copy executable to the correct location after setup_executable completes
+        fs.copyFile(sourcePath, destinationPath, (err) => {
+            if (err) {
+                console.error(`Error copying rebabel_convert: ${err.message}`);
+            } else {
+                console.log('rebabel_convert copied successfully');
+            }
+        });
+    });
+}
+
+// function definitions
+// function for deleting previous build files
+function deleteIfExists (path) {
     if (fs.existsSync(path)) {
         if (fs.lstatSync(path).isDirectory()) {
             fs.rmSync(path, { recursive: true });
@@ -22,87 +64,39 @@ const deleteIfExists = (path) => {
     }
 };
 
-deleteIfExists(venvPath);
-deleteIfExists(buildPath);
-deleteIfExists(distPath);
-deleteIfExists(specPath);
+// function for executing scripts
+function executeScript(scriptPath, scriptName, onSuccess) {
+    // powershell vs bash
+    const shell = isWindows ? 'powershell.exe' : 'bash';
+    const shellArgs = isWindows ? ['-ExecutionPolicy', 'Bypass', '-File', scriptPath] : ['-c', scriptPath];
 
-if (isWindows) {
-    const scriptPath = path.join('.github', 'scripts', 'create_rebabel_convert_executable_windows.ps1');
-    const sourcePath = path.join(__dirname, 'dist', 'rebabel_convert.exe');
-    const destinationPath = path.join('node_modules', 'electron', 'dist', 'resources', 'rebabel_convert.exe');
+    console.log(`Executing ${scriptName}...`);
+    const process = spawn(shell, shellArgs);
 
-    //create executable
-    console.log('Executing PowerShell script to create executable...');
-
-    const powershell = spawn('powershell.exe', ['-ExecutionPolicy', 'Bypass', '-File', scriptPath]);
-
-    powershell.stdout.on('data', (data) => {
-        console.log(`PowerShell Output: ${data}`);
+    // output logging
+    process.stdout.on('data', (data) => {
+        const message = data.toString().trim();
+        console.log(`${scriptName} console: ${message}`);
     });
 
-    powershell.stderr.on('data', (data) => {
-        console.error(`PowerShell Error Output: ${data}`);
+    process.stderr.on('data', (data) => {
+        const errorMessage = data.toString().trim();
+        if (errorMessage.toLowerCase().includes('info') || errorMessage.toLowerCase().includes('git clone')) {
+            // not actually an error
+            console.log(`${scriptName}: ${errorMessage}`);
+        } else {
+            // error
+            console.error(`${scriptName} error: ${errorMessage}`);
+        }
     });
 
-    powershell.on('close', (code) => {
+    // handle on close
+    process.on('close', (code) => {
         if (code !== 0) {
-            console.error(`PowerShell script exited with code ${code}`);
+            console.error(`${scriptName} exited with code ${code}`);
             return;
         }
-        console.log('PowerShell script executed successfully.');
-
-        // Copy executable to correct location
-        fs.copyFile(sourcePath, destinationPath, (err) => {
-            if (err) {
-                console.error(`Error copying rebabel_convert.exe: ${err.message}`);
-            } else {
-                console.log('rebabel_convert.exe copied successfully');
-            }
-        });
-    });
-}
-else {
-    const scriptPath = path.join('.github', 'scripts', 'create_rebabel_convert_executable');
-    const sourcePath = path.join(__dirname, 'dist', 'rebabel_convert');
-    const linuxDestination = path.join('node_modules', 'electron', 'dist', 'resources', 'rebabel_convert');
-    const macDestination = path.join('node_modules', 'electron', 'dist', 'Electron.app', 'Contents', 'Resources', 'rebabel_convert');
-    const destinationPath = isMac ? macDestination : linuxDestination;
-
-    //create executable
-    console.log('Executing Bash script to create executable...');
-
-    try {
-        execSync(`chmod +x ${scriptPath}`);
-        console.log(`Set executable permissions for: ${scriptPath}`);
-    } catch (error) {
-        console.error(`Failed to set permissions: ${error.message}`);
-    }
-
-    const bash = spawn('bash', ['-c', scriptPath]);
-
-    bash.stdout.on('data', (data) => {
-        console.log(`Bash Output: ${data}`);
-    });
-
-    bash.stderr.on('data', (data) => {
-        console.error(`Bash Error Output: ${data}`);
-    });
-
-    bash.on('close', (code) => {
-        if (code !== 0) {
-            console.error(`Bash script exited with code ${code}`);
-            return;
-        }
-        console.log('Bash script executed successfully.');
-
-        // Copy executable to correct location
-        fs.copyFile(sourcePath, destinationPath, (err) => {
-            if (err) {
-                console.error(`Error copying rebabel_convert: ${err.message}`);
-            } else {
-                console.log('rebabel_convert copied successfully');
-            }
-        });
+        console.log(`${scriptName} executed successfully`);
+        if (onSuccess) onSuccess();
     });
 }
