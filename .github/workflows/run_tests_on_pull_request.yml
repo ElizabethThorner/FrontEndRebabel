@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: 18
       - name: Install Virtual Frame Buffer Package(xvfb)
         run: sudo apt-get install xvfb
       - name: Create Virtual Display for ChromeDriver to Use
