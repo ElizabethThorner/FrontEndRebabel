@@ -5,23 +5,23 @@ const isWindows = process.platform === 'win32';
 const isMac = process.platform === 'darwin';
 
 // delete previous build files
-deleteIfExists(path.join(__dirname, 'build'));
-deleteIfExists(path.join(__dirname, 'dist'));
-deleteIfExists(path.join(__dirname, 'rebabel_convert.spec'));
+deleteIfExists(path.join('rebabel_scripts', 'build'));
+deleteIfExists(path.join('rebabel_scripts', 'dist'));
+deleteIfExists(path.join('rebabel_scripts', 'rebabel_convert.spec'));
 
 // define script paths
-const setupVenvPath = path.join(__dirname, isWindows ? 'setup_venv.ps1' : 'setup_venv');
-const setupExecutablePath = path.join(__dirname, isWindows ? 'setup_executable.ps1' : 'setup_executable');
+const setupVenvPath = path.join('rebabel_scripts', isWindows ? 'setup_venv.ps1' : 'setup_venv');
+const setupExecutablePath = path.join('rebabel_scripts', isWindows ? 'setup_executable.ps1' : 'setup_executable');
 
 // define source and destination for created executable
-const sourcePath = path.join(__dirname, 'dist', isWindows ? 'rebabel_convert.exe' : 'rebabel_convert');
+const sourcePath = path.join('rebabel_scripts', 'dist', isWindows ? 'rebabel_convert.exe' : 'rebabel_convert');
 const destinationPath = path.join('node_modules', 'electron', 'dist',
     isMac ? 'Electron.app/Contents/Resources' : 'resources', // on mac, the destination is different
     isWindows ? 'rebabel_convert.exe' : 'rebabel_convert' // on windows, add .exe extension
 );
 
 // create virtual environment if needed, then create executable
-if (!fs.existsSync(path.join(__dirname, '.venv'))) {
+if (!fs.existsSync(path.join('rebabel_scripts', '.venv'))) {
     console.log('No virtual environment detected...');
     executeScript(setupVenvPath, 'setup_venv', () => {
         // run setup_executable after setup_venv completes
