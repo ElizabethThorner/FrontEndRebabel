@@ -9,33 +9,33 @@ const dataFormats = [
   {
     name: "Flextext",
     rebabelCode: "flextext",
-    operations: "both"
+    operations: "both",
   },
   {
     name: "Conllu",
     rebabelCode: "conllu",
-    operations: "both"
+    operations: "both",
   },
   {
     name: "NLP",
     rebabelCode: "nlp_pos",
-    operations: "import"
+    operations: "import",
   },
   {
     name: "ELAN",
     rebabelCode: "elan",
-    operations: "both"
+    operations: "both",
   },
   {
     name: "Macula",
     rebabelCode: "macula-node",
-    operations: "import"
+    operations: "import",
   },
   {
     name: "SFM",
     rebabelCode: "sfm",
-    operations: "import"
-  }
+    operations: "import",
+  },
 ];
 
 function SelectTypes({
@@ -48,7 +48,7 @@ function SelectTypes({
   isLoading,
   setInputFileConfigOpen = undefined,
   setOutputFileConfigOpen = undefined,
-  fileTypeExtensions
+  fileTypeExtensions,
 }) {
   const errorColor = "#FFBF00";
 
@@ -62,7 +62,7 @@ function SelectTypes({
   //Whether to show additional parameters for output
   let displayOutputButton = false;
 
-  if ((data.outFileType === "flextext") || (data.outFileType === "elan")) {
+  if (data.outFileType === "flextext" || data.outFileType === "elan") {
     displayOutputButton = true;
   }
 
@@ -76,8 +76,15 @@ function SelectTypes({
 
     if (data.filePath.length) {
       for (let path of data.filePath) {
-        if (path.toString().split(".")[1] !== fileTypeExtensions[e.target.value]) {
-          setErrorState(true, "Input type must match file extension", "inFileType", true);
+        if (
+          path.toString().split(".")[1] !== fileTypeExtensions[e.target.value]
+        ) {
+          setErrorState(
+            true,
+            "Input type must match file extension",
+            "inFileType",
+            true
+          );
           return;
         }
       }
@@ -98,7 +105,7 @@ function SelectTypes({
       return;
     }
 
-    if ((e.target.value === "flextext") || (e.target.value === "elan")) {
+    if (e.target.value === "flextext" || e.target.value === "elan") {
       setOutputFileConfigOpen(true);
     }
 
@@ -153,7 +160,7 @@ function SelectTypes({
               }
             })}
           </select>
-          <Error customStyle={{ color: `${errorColor}` }}>
+          <Error customStyle={{ color: `${errorColor}`, width: "130%" }}>
             {selectConfig === "inputType"
               ? errors.inFileType.message
               : errors.outFileType.message}
@@ -161,7 +168,7 @@ function SelectTypes({
         </div>
         {selectConfig === "inputType" && displayInputButton && (
           <button
-            className={styles.inputButton}
+            className={styles.configButton}
             disabled={isLoading}
             onClick={() => setInputFileConfigOpen(true)}
           >
@@ -170,7 +177,7 @@ function SelectTypes({
         )}
         {selectConfig === "outputType" && displayOutputButton && (
           <button
-            className={styles.outputButton}
+            className={styles.configButton}
             disabled={isLoading}
             onClick={() => setOutputFileConfigOpen(true)}
           >
