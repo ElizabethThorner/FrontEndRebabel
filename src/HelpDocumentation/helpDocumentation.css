@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  margin: 1rem;
+  text-decoration: none;
+  color: #2c5d8a;
+}
+
+a:hover {
+  font-weight: 500;
+}
+
+table {
+  width: fit-content;
+}
+
+td {
+  text-align: center;
+}

@@ -1,18 +1,7 @@
-const {
-  app,
-  Menu,
-  BrowserWindow,
-  ipcMain,
-  dialog,
-  shell,
-} = require("electron");
+const { app, Menu, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("node:path");
 const { unlink } = require("node:fs");
 const { execFileSync } = require("node:child_process");
-const util = require("node:util");
-const execFilePromisified = util.promisify(
-  require("node:child_process").execFile
-);
 const createMenuTemplate = require("./menu");
 const fs = require("fs");
 
@@ -32,6 +21,29 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
+const createHelpWindow = () => {
+  const mainWindow = new BrowserWindow({
+    width: 900,
+    height: 800,
+    resizable: true,
+    minWidth: 900,
+    minHeight: 768,
+    icon: "src/icon.png",
+  });
+
+  let filePath = "./src/HelpDocumentation/helpDocumentation.html";
+
+  if (!isDev) {
+    filePath = path.join(
+      process.resourcesPath,
+      "HelpDocumentation/helpDocumentation.html"
+    );
+  }
+
+  mainWindow.loadFile(filePath);
+  mainWindow.setMenu(null);
+};
+
 const createWindow = () => {
   // Create browser window.
   const mainWindow = new BrowserWindow({
@@ -40,10 +52,16 @@ const createWindow = () => {
     resizable: true,
     minWidth: 900,
     minHeight: 768,
-    icon: 'src/icon.png',
+    icon: "src/icon.png",
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
+  });
+
+  mainWindow.on("close", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
   });
 
   // Load the index.html of the app.
@@ -51,6 +69,7 @@ const createWindow = () => {
 
   // Create and set menu bar
   const menuTemplate = createMenuTemplate(isDev);
+  insertHelpWindow(menuTemplate);
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 };
@@ -90,11 +109,11 @@ app.whenReady().then(() => {
               "eaf",
               "conllu",
               "sfm",
-              "xml"
+              "xml",
             ],
           },
         ],
-        properties: ["openFile"]
+        properties: ["openFile"],
       });
     } else {
       filePathSelect = dialog.showOpenDialogSync({
@@ -104,7 +123,7 @@ app.whenReady().then(() => {
             extensions: ["etf"],
           },
         ],
-        properties: ["openFile"]
+        properties: ["openFile"],
       });
     }
 
@@ -124,7 +143,7 @@ app.whenReady().then(() => {
 
     let returnData = {
       success: false,
-      message: "An unexpected error occurred!"
+      message: "An unexpected error occurred!",
     };
 
     //calls saveAs dialog if fileName and output file type aren't empty
@@ -140,14 +159,8 @@ app.whenReady().then(() => {
     }
 
     // get arguments from input forms
-    const {
-      filePath,
-      fileName,
-      inFileType,
-      outFileType,
-      mappings,
-      additionalArguments,
-    } = data;
+    const { filePath, inFileType, outFileType, mappings, additionalArguments } =
+      data;
 
     let buffer = "";
     try {
@@ -236,4 +249,20 @@ function cleanErrorMessage(error) {
   const beginOfBrackets = errorString.indexOf("[", beginOfValueError);
 
   return errorString.substring(beginOfValueError, beginOfBrackets);
+}
+
+function insertHelpWindow(menuTemplate) {
+  for (let item in menuTemplate) {
+    //Help Entry in Menu bar
+    if (menuTemplate[item].label === "Help") {
+      for (let index in menuTemplate[item].submenu) {
+        //Help entry in Help drop down
+        if (menuTemplate[item].submenu[index].label === "Help") {
+          menuTemplate[item].submenu[index].click = () => {
+            createHelpWindow();
+          };
+        }
+      }
+    }
+  }
 }
