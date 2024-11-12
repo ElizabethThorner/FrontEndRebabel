@@ -2,30 +2,14 @@
 
 cd ./rebabel_scripts
 
-echo
-echo '--------------------------------------'
-echo 'Creating Python virtual environment...'
-echo '--------------------------------------'
-echo
+echo 'Creating Python virtual environment (this may take a while)...'
 python3 -m venv .venv
 
-echo
-echo '----------------------------------------'
 echo 'Activating Python virtual environment...'
-echo '----------------------------------------'
-echo
 source .venv/bin/activate
 
-echo
-echo '----------------------------------------------'
 echo 'Installing dependencies in requirements.txt...'
-echo '----------------------------------------------'
-echo
 pip install -r requirements.txt
 
-echo 
-echo '------------------------------------------'
 echo 'Deactivating Python virtual environment...'
-echo '------------------------------------------'
-echo
 deactivate

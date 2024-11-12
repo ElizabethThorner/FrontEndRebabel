@@ -89,12 +89,12 @@ function executeScript(scriptPath, scriptName, onSuccess) {
     // output logging
     process.stdout.on('data', (data) => {
         const message = data.toString().trim();
-        console.log(`${scriptName} console log: ${message}`);
+        console.log(`${scriptName} console: ${message}`);
     });
 
     process.stderr.on('data', (data) => {
         const errorMessage = data.toString().trim();
-        if (errorMessage.toLowerCase().includes('info')) {
+        if (errorMessage.toLowerCase().includes('info') || errorMessage.toLowerCase().includes('git clone')) {
             // not actually an error
             console.log(`${scriptName}: ${errorMessage}`);
         } else {

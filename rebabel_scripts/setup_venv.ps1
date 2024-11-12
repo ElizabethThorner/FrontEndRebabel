@@ -1,22 +1,12 @@
 cd rebabel_scripts
 
-Write-Host ""
-Write-Host "--------------------------------------"
-Write-Host "Creating Python virtual environment..."
-Write-Host "--------------------------------------"
-Write-Host ""
+Write-Host "Creating Python virtual environment (this may take a while)..."
 python -m venv .venv
 
-Write-Host ""
-Write-Host "----------------------------------------"
 Write-Host "Activating Python virtual environment..."
-Write-Host "----------------------------------------"
-Write-Host ""
 & ".venv\Scripts\Activate.ps1"
 
-Write-Host ""
-Write-Host "----------------------------------------------"
 Write-Host "Installing dependencies in requirements.txt..."
-Write-Host "----------------------------------------------"
-Write-Host ""
 pip install -r requirements.txt
+
+Write-Host "Deactivating Python virtual environment..."
