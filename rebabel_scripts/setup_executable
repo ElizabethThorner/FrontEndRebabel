@@ -1,0 +1,24 @@
+#!/bin/bash
+
+cd ./rebabel_scripts
+
+echo
+echo '----------------------------------------'
+echo 'Activating Python virtual environment...'
+echo '----------------------------------------'
+echo
+source .venv/bin/activate
+
+echo
+echo '----------------------------------------------'
+echo 'Creating executable from rebabel_convert.py...'
+echo '----------------------------------------------'
+echo
+pyinstaller --onefile --collect-all rebabel_format rebabel_convert.py
+
+echo 
+echo '------------------------------------------'
+echo 'Deactivating Python virtual environment...'
+echo '------------------------------------------'
+echo
+deactivate
