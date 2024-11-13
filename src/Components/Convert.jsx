@@ -21,6 +21,13 @@ function Convert({
       setErrorState(true, "Select a File", "selectFile");
       errorOccurred = true;
     }
+    
+    //Too many files uploaded
+    const allowedFilesCount = data.inFileType === "nlp_pos" && data.additionalArguments.nlpFileType === "separate" ? 2 : 1;
+    if (data.filePath.length > allowedFilesCount) {
+      setErrorState(true, `Only ${allowedFilesCount} file(s) can be selected for this file input type`, "selectFile");
+      errorOccurred = true;
+    }
 
     //No import type selected
     if (data.inFileType === "") {
