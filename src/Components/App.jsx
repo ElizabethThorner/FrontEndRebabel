@@ -33,7 +33,7 @@ function App() {
     message: "An Unexpected Error Occured!",
   });
   //Set state for modals
-  const [isMappingsOpen, setMappingsOpen] = useState(false);
+  const [isMappingsOpen, setMappingsOpen] = useState(true);
   const [isInputFileConfigOpen, setInputFileConfigOpen] = useState(false);
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
   const [isDisplayResultsOpen, setDisplayResultsOpen] = useState(false);

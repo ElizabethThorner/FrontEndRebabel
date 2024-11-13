@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Error from "../Error.jsx";
 import styles from "./Mappings.module.css";
 import MappingsTable from "./MappingsTable.jsx";
+import { MdOutlineHelp } from "react-icons/md";
 
 function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   const [isAddTypeMappingOpen, setAddTypeMappingOpen] = useState(false);
@@ -194,6 +195,9 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
     <dialog open={isOpen} className="modal-overlay">
       <article>
         <h2>Mappings</h2>
+        <a data-tooltip="Open Mappings Help" data-placement="right">
+          <MdOutlineHelp className={styles.helpIcon} />
+        </a>
         <hr></hr>
         <section>
           {errors.mappings.status && (
