@@ -15,6 +15,7 @@ const FileExtensions = {
   elan: ".eaf",
   nlp_pos: ".txt",
 };
+let helpOpen = false;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -42,6 +43,10 @@ const createHelpWindow = () => {
 
   mainWindow.loadFile(filePath);
   mainWindow.setMenu(null);
+
+  mainWindow.on("close", () => {
+    helpOpen = !helpOpen;
+  });
 };
 
 const createWindow = () => {
@@ -192,6 +197,13 @@ app.whenReady().then(() => {
     return returnData;
   });
 
+  ipcMain.on("openHelpWindow", () => {
+    if (!helpOpen) {
+      createHelpWindow();
+      helpOpen = true;
+    }
+  });
+
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on("activate", () => {
@@ -259,7 +271,10 @@ function insertHelpWindow(menuTemplate) {
         //Help entry in Help drop down
         if (menuTemplate[item].submenu[index].label === "Help") {
           menuTemplate[item].submenu[index].click = () => {
-            createHelpWindow();
+            if (!helpOpen) {
+              createHelpWindow();
+              helpOpen = true;
+            }
           };
         }
       }

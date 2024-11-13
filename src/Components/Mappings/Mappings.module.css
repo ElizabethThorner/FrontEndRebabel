@@ -14,6 +14,22 @@
   margin-left: 0.5rem;
 }
 
+h2 {
+  display: contents;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.helpIcon {
+  margin-left: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+  color: #2c5d8a;
+}
+
 .inputsContainer {
   display: flex;
   flex-direction: row;
