@@ -101,6 +101,7 @@ app.whenReady().then(() => {
 
   ipcMain.handle("selectFile", async (event, isMainFileSelect) => {
     let filePathSelect;
+    let fileNames;
 
     if (isMainFileSelect) {
       filePathSelect = dialog.showOpenDialogSync({
@@ -118,7 +119,7 @@ app.whenReady().then(() => {
             ],
           },
         ],
-        properties: ["openFile"],
+        properties: ["openFile", "multiSelections"],
       });
     } else {
       filePathSelect = dialog.showOpenDialogSync({
@@ -137,10 +138,22 @@ app.whenReady().then(() => {
       return undefined;
     }
 
-    //gets fileName from absolute path
-    const fileName = path.basename(filePathSelect[0]);
+    if (isMainFileSelect) {
+      const fileName = [];
 
-    return { filePath: filePathSelect, fileName: fileName };
+      for (let filePath of filePathSelect) {
+        fileName.push(path.basename(filePath));
+      }
+
+      fileNames = fileName;
+    } else {
+      //gets fileName from absolute path
+      const fileName = path.basename(filePathSelect[0]);
+
+      fileNames = fileName;
+    }
+
+    return { filePath: filePathSelect, fileName: fileNames };
   });
 
   ipcMain.handle("rebabelConvert", async (event, data) => {

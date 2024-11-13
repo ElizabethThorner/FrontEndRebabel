@@ -20,16 +20,20 @@ function SelectFiles({
 
   async function handleSelectFile() {
     setSelecting(true);
+
     //returns object with filePath and fileName
     const response = await window.pythonApi.getFile(true);
     setSelecting(false);
+
     if (response !== undefined) {
       //loops through checking to see if file name already exists
       //throws an error if true
-      for (let entry in data.fileName) {
-        if (data.fileName[entry] === response.fileName) {
-          setErrorState(true, "File Names must be unique", "selectFile");
-          return;
+      for (let entry of data.fileName) {
+        for (let name of response.fileName) {
+          if (entry === name) {
+            setErrorState(true, "File Names must be unique", "selectFile");
+            return;
+          }
         }
       }
 
@@ -51,8 +55,8 @@ function SelectFiles({
 
       setData((data) => ({
         ...data,
-        fileName: [...data.fileName, response.fileName],
-        filePath: [...data.filePath, response.filePath],
+        fileName: [...data.fileName, ...response.fileName],
+        filePath: [...data.filePath, ...response.filePath],
       }));
 
       setErrorState(false, "", "selectFile");
