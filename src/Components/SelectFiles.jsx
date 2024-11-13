@@ -28,10 +28,12 @@ function SelectFiles({
     if (response !== undefined) {
       //loops through checking to see if file name already exists
       //throws an error if true
-      for (let entry in data.fileName) {
-        if (data.fileName[entry] === response.fileName) {
-          setErrorState(true, "File Names must be unique", "selectFile");
-          return;
+      for (let entry of data.fileName) {
+        for (let name of response.fileName) {
+          if (entry === name) {
+            setErrorState(true, "File Names must be unique", "selectFile");
+            return;
+          }
         }
       }
 
