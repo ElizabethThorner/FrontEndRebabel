@@ -69,6 +69,9 @@ const createAboutWindow = () => {
     minWidth: 900,
     minHeight: 768,
     icon: "src/icon.png",
+    webPreferences: {
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+    }
   });
 
   let filePath = "HelpDocumentation/About/index.html";
@@ -255,12 +258,7 @@ app.whenReady().then(() => {
     }
   });
 
-  ipcMain.on("openAboutWindow", (event, section) => {
-    if (!aboutOpen) {
-      createAboutWindow();
-      aboutOpen = true;
-    }
-  });
+  ipcMain.handle("get-app-version", () => app.getVersion());
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
