@@ -16,6 +16,7 @@ const FileExtensions = {
   nlp_pos: ".txt",
 };
 let helpOpen = false;
+let aboutOpen = false;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -32,7 +33,7 @@ const createHelpWindow = (section) => {
     icon: "src/icon.png",
   });
 
-  let filePath = "HelpDocumentation/";
+  let filePath = "HelpDocumentation/Help/";
 
   if (section === "main") {
     filePath += "index.html";
@@ -57,6 +58,32 @@ const createHelpWindow = (section) => {
 
   mainWindow.on("close", () => {
     helpOpen = !helpOpen;
+  });
+};
+
+const createAboutWindow = () => {
+  const mainWindow = new BrowserWindow({
+    width: 900,
+    height: 800,
+    resizable: true,
+    minWidth: 900,
+    minHeight: 768,
+    icon: "src/icon.png",
+  });
+
+  let filePath = "HelpDocumentation/About/index.html";
+
+  if (!isDev) {
+    filePath = path.join(process.resourcesPath, filePath);
+  } else {
+    filePath = "./src/" + filePath;
+  }
+
+  mainWindow.loadFile(filePath);
+  mainWindow.setMenu(null);
+
+  mainWindow.on("close", () => {
+    aboutOpen = !aboutOpen;
   });
 };
 
@@ -85,7 +112,7 @@ const createWindow = () => {
 
   // Create and set menu bar
   const menuTemplate = createMenuTemplate(isDev);
-  insertHelpWindow(menuTemplate);
+  insertSubWindow(menuTemplate);
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 };
@@ -228,6 +255,13 @@ app.whenReady().then(() => {
     }
   });
 
+  ipcMain.on("openAboutWindow", (event, section) => {
+    if (!aboutOpen) {
+      createAboutWindow();
+      aboutOpen = true;
+    }
+  });
+
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on("activate", () => {
@@ -287,7 +321,7 @@ function cleanErrorMessage(error) {
   return errorString.substring(beginOfValueError, beginOfBrackets);
 }
 
-function insertHelpWindow(menuTemplate) {
+function insertSubWindow(menuTemplate) {
   for (let item in menuTemplate) {
     //Help Entry in Menu bar
     if (menuTemplate[item].label === "Help") {
@@ -298,6 +332,16 @@ function insertHelpWindow(menuTemplate) {
             if (!helpOpen) {
               createHelpWindow("main");
               helpOpen = true;
+            }
+          };
+        }
+
+        //About entry in Help drop down
+        if (menuTemplate[item].submenu[index].label === "About") {
+          menuTemplate[item].submenu[index].click = () => {
+            if (!aboutOpen) {
+              createAboutWindow();
+              aboutOpen = true;
             }
           };
         }

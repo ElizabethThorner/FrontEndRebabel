@@ -124,30 +124,7 @@ const createMenuTemplate = (isDev) => {
         },
         {
           label: "About",
-          click: () => {
-            dialog.showMessageBox({
-              type: "info",
-              title: "About reBabel",
-              message: `reBabel (Version: ${app.getVersion()})`,
-              detail:
-                `Welcome to reBabel!\n` +
-                `\n` +
-                `This tool is designed to simplify file format conversions between various language data files. ` +
-                `reBabel currently supports conversions between the following formats: \n` +
-                `- ELAN (.eaf)\n` +
-                `- Fieldworks Language Explorer (.flextext)\n` +
-                `- Universal Dependencies (.conllu)\n` +
-                `- Natural Language Processing (.txt)\n` +
-                `\n` +
-                `Team Members:\n` +
-                `- Joseph Barron: Backend Developer/Scrum Master\n` +
-                `- Adassa Coimin: Frontend/Backend Developer\n` +
-                `- Matthew Denslinger: Frontend Developer\n` +
-                `- Elizabeth Thorner: Backend Developer/Project Manager\n` +
-                `- Darren Wang: Frontend Developer`,
-              buttons: ["OK"],
-            });
-          },
+          click: "",
         },
       ],
     },
