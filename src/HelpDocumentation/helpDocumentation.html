@@ -64,20 +64,25 @@
           <h4>NLP Files</h4>
           <p>
             NLP file types have additional input parameters based on whether
-            they are a combined NLP file or separate NLP files.
+            there is one combined file or if there are separate files.
           </p>
-          <h6>Combined NLP Files</h6>
+          <h6>Combined NLP File</h6>
           <p>
-            A combined NLP file has a input parameter for a delimiter. The
-            delimiter by default is / and so a file using the default delimiter
-            would be represented as
+            A combined NLP file has a input parameter for a delimiter, by default /.
+            Each word is separated from its part of speech by a delimiter, and
+            the word/pos pairs are separated from each other by spaces. This would
+            be an example of the file structure:
           </p>
           <blockquote>The/DET dog/NOUN barks/VERB ./PUNC</blockquote>
-          <h6>Separate NLP File</h6>
+          <h6>Separate NLP Files</h6>
           <p>
-            Separate NLP files consist of a part of speech file and a language
-            file.
+            Separate NLP files consist of one file containing the parts of speech
+            and one file containing the words. This would be an example of the file 
+            structure for the part of speech file:
           </p>
+          <blockquote>DET NOUN VERB PUNC</blockquote>
+          <p>And this would be an example of the structure for the language file:</p>
+          <blockquote>The dog barks .</blockquote>
         </div>
       </section>
       <section id="exporting">
@@ -106,9 +111,16 @@
           </tbody>
         </table>
         <h4>Flextext Files</h4>
-        <p>Information about flextext settings here</p>
+        In order to export to the flextext format, the user has to provide
+        the layers that will be present in the resulting flextext file out of
+        "interlinear-text", "paragraph", "phrase", "word", and "morpheme".
+        <p></p>
         <h4>ELAN Files</h4>
-        <p>Information about ELAN settings here</p>
+        <p>In order to export to the ELAN format, the user has to provide
+          a .etf template file. The user also has the option to interpret
+          time offsets as either seconds or milliseconds, with milliseconds
+          as the default.
+        </p>
       </section>
       <section id="mappings">
         <h2>Mappings</h2>
