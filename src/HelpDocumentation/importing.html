@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' data:; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self' data:; script-src 'self'"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="pico.min.css" />
+    <link rel="stylesheet" href="helpDocumentation.css" />
+    <title>reBabel Help</title>
+  </head>
+  <body>
+    <main class="container">
+      <header><h1>reBabel Help</h1></header>
+      <nav>
+        <a href="index.html">Main Menu</a>
+      </nav>
+      <section id="importing">
+        <h2>Importing</h2>
+        <div>
+          <p>There are currently six file types supported for importing.</p>
+          <table class="striped">
+            <thead>
+              <tr>
+                <th scope="col">File Type</th>
+                <th scope="col">Supported File Extension</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Flextext</td>
+                <td>.flextext</td>
+              </tr>
+              <tr>
+                <td>Conllu</td>
+                <td>.conllu</td>
+              </tr>
+              <tr>
+                <td>NLP</td>
+                <td>.txt</td>
+              </tr>
+              <tr>
+                <td>ELAN</td>
+                <td>.eaf</td>
+              </tr>
+              <tr>
+                <td>SFM</td>
+                <td>.sfm</td>
+              </tr>
+              <tr>
+                <td>Macula</td>
+                <td>.xml</td>
+              </tr>
+            </tbody>
+          </table>
+          <section id="nlp">
+            <h4>NLP Files</h4>
+            <p>
+              NLP file types have additional input parameters based on whether
+              there is one combined file or if there are separate files.
+            </p>
+            <h6>Combined NLP File</h6>
+            <p>
+              A combined NLP file has a input parameter for a delimiter, by
+              default /. Each word is separated from its part of speech by a
+              delimiter, and the word/pos pairs are separated from each other by
+              spaces. This would be an example of the file structure:
+            </p>
+            <blockquote>The/DET dog/NOUN barks/VERB ./PUNC</blockquote>
+            <h6>Separate NLP Files</h6>
+            <p>
+              Separate NLP files consist of one file containing the parts of
+              speech and one file containing the words. This would be an example
+              of the file structure for the part of speech file:
+            </p>
+            <blockquote>DET NOUN VERB PUNC</blockquote>
+            <p>
+              And this would be an example of the structure for the language
+              file:
+            </p>
+            <blockquote>The dog barks .</blockquote>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

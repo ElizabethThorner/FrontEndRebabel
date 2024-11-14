@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' data:; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self' data:; script-src 'self'"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="pico.min.css" />
+    <link rel="stylesheet" href="helpDocumentation.css" />
+    <title>reBabel Help</title>
+  </head>
+  <body>
+    <main class="container">
+      <header><h1>reBabel Help</h1></header>
+      <nav>
+        <a href="index.html">Main Menu</a>
+      </nav>
+      <section id="exporting">
+        <h2>Exporting</h2>
+        <p>There are currently three file types supported for exporting.</p>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th scope="col">File Type</th>
+              <th scope="col">Supported File Extension</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Flextext</td>
+              <td>.flextext</td>
+            </tr>
+            <tr>
+              <td>Conllu</td>
+              <td>.conllu</td>
+            </tr>
+            <tr>
+              <td>ELAN</td>
+              <td>.eaf</td>
+            </tr>
+          </tbody>
+        </table>
+        <section id="flextext">
+          <h4>Flextext Files</h4>
+          <p>
+            In order to export to the flextext format, the user has to provide
+            the layers that will be present in the resulting flextext file out
+            of "interlinear-text", "paragraph", "phrase", "word", and
+            "morpheme".
+          </p>
+        </section>
+        <section id="elan">
+          <h4>ELAN Files</h4>
+          <p>
+            In order to export to the ELAN format, the user has to provide a
+            .etf template file. The user also has the option to interpret time
+            offsets as either seconds or milliseconds, with milliseconds as the
+            default.
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

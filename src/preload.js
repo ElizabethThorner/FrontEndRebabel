@@ -4,5 +4,5 @@ contextBridge.exposeInMainWorld("pythonApi", {
   getFile: (isMainFileSelect) =>
     ipcRenderer.invoke("selectFile", isMainFileSelect),
   rebabelConvert: (data) => ipcRenderer.invoke("rebabelConvert", data),
-  openHelpWindow: () => ipcRenderer.send("openHelpWindow"),
+  openHelpWindow: (section) => ipcRenderer.send("openHelpWindow", section),
 });

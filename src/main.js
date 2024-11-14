@@ -22,7 +22,7 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-const createHelpWindow = () => {
+const createHelpWindow = (section) => {
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 800,
@@ -32,13 +32,24 @@ const createHelpWindow = () => {
     icon: "src/icon.png",
   });
 
-  let filePath = "./src/HelpDocumentation/helpDocumentation.html";
+  let filePath = "HelpDocumentation/";
+
+  if (section === "main") {
+    filePath += "index.html";
+  } else if (section === "import") {
+    filePath += "importing.html";
+  } else if (section === "export") {
+    filePath += "exporting.html";
+  } else if (section === "mappings") {
+    filePath += "mappings.html";
+  } else {
+    filePath += "index.html";
+  }
 
   if (!isDev) {
-    filePath = path.join(
-      process.resourcesPath,
-      "HelpDocumentation/helpDocumentation.html"
-    );
+    filePath = path.join(process.resourcesPath, filePath);
+  } else {
+    filePath = "./src/" + filePath;
   }
 
   mainWindow.loadFile(filePath);
@@ -210,9 +221,9 @@ app.whenReady().then(() => {
     return returnData;
   });
 
-  ipcMain.on("openHelpWindow", () => {
+  ipcMain.on("openHelpWindow", (event, section) => {
     if (!helpOpen) {
-      createHelpWindow();
+      createHelpWindow(section);
       helpOpen = true;
     }
   });
@@ -285,7 +296,7 @@ function insertHelpWindow(menuTemplate) {
         if (menuTemplate[item].submenu[index].label === "Help") {
           menuTemplate[item].submenu[index].click = () => {
             if (!helpOpen) {
-              createHelpWindow();
+              createHelpWindow("main");
               helpOpen = true;
             }
           };

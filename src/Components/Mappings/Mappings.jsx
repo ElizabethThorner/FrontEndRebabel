@@ -198,7 +198,7 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         <a data-tooltip="Open Mappings Help" data-placement="right">
           <MdOutlineHelp
             className={styles.helpIcon}
-            onClick={() => window.pythonApi.openHelpWindow()}
+            onClick={() => window.pythonApi.openHelpWindow("mappings")}
           />
         </a>
         <hr></hr>
