@@ -93,22 +93,6 @@ const createMenuTemplate = (isDev) => {
       label: "Help",
       submenu: [
         {
-          label: "Getting Started",
-          click: () => {
-            dialog.showMessageBox({
-              type: "info",
-              title: "Getting Started",
-              message: "Getting Started",
-              detail:
-                `1. Select the file(s) to be converted.\n` +
-                `2. Choose the desired input and output file formats.\n` +
-                `3. Configure mappings or additional settings, if applicable.\n` +
-                `4. Click "Convert" and specify the destination for the converted file.`,
-              buttons: ["OK"],
-            });
-          },
-        },
-        {
           label: "Documentation",
           click: () => {
             shell.openExternal(
