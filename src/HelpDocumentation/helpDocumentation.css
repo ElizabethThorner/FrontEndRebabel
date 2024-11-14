@@ -1,11 +1,15 @@
 header {
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 nav {
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 a {
@@ -23,4 +27,8 @@ table {
 
 td {
   text-align: center;
+}
+
+body {
+  overflow-y: scroll; /* Always show vertical scrollbar */
 }

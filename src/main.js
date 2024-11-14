@@ -25,11 +25,11 @@ if (require("electron-squirrel-startup")) {
 
 const createHelpWindow = (section) => {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 600,
+    height: 720,
     resizable: true,
-    minWidth: 800,
-    minHeight: 600,
+    minWidth: 600,
+    minHeight: 720,
     icon: "src/icon.png",
   });
 
@@ -63,11 +63,11 @@ const createHelpWindow = (section) => {
 
 const createAboutWindow = () => {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    resizable: true,
-    minWidth: 800,
-    minHeight: 600,
+    width: 600,
+    height: 450,
+    resizable: false,
+    minWidth: 600,
+    minHeight: 450,
     icon: "src/icon.png",
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
@@ -96,8 +96,8 @@ const createWindow = () => {
     width: 1024,
     height: 768,
     resizable: true,
-    minWidth: 800,
-    minHeight: 600,
+    minWidth: 1024,
+    minHeight: 768,
     icon: "src/icon.png",
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
