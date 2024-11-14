@@ -40,7 +40,7 @@ function OutputFileConfig({
         <a data-tooltip={helpTextInfo} data-placement="bottom">
           <MdOutlineHelp
             className={styles.helpIcon}
-            onClick={() => window.pythonApi.openHelpWindow()}
+            onClick={() => window.pythonApi.openHelpWindow("export")}
           />
         </a>
         <hr></hr>
