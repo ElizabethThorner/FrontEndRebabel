@@ -93,10 +93,10 @@ const createAboutWindow = () => {
 const createWindow = () => {
   // Create browser window.
   const mainWindow = new BrowserWindow({
-    width: 1024,
+    width: 900,
     height: 768,
     resizable: true,
-    minWidth: 1024,
+    minWidth: 900,
     minHeight: 768,
     icon: "src/icon.png",
     webPreferences: {
