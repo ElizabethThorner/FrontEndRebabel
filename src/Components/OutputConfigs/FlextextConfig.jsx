@@ -35,7 +35,7 @@ function FlextextConfig({
         (opt1) => flextextOptions.findIndex((opt2) => opt2 === opt1) > rootIndex
       );
       const skippedLayers = allLayersBelowRoot.filter(
-        (layer) => !sortedLayers.includes(layer)
+        (layer) => !sortedLayers.some((selected) => selected.value === layer.value)
       );
 
       data.additionalArguments.root = sortedLayers[0].value;
