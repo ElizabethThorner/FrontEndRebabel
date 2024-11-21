@@ -24,7 +24,93 @@
       </nav>
       <section id="mappings">
         <h2>Mappings</h2>
-        <p>Mappings info here</p>
+        <p>
+          Due to the difficulty (indeed, probably impossibility) of creating a naming system that covers all use-cases, 
+          reBabel expects each format converter to operate in a separate namespace. 
+          Thus, the FLExText importer will create features beginning with FlexText: while the CoNLL-U importer creates ones starting with UD:. 
+          Likewise, the exporters for those formats check for features with the same prefixes and so a conversion from one file type to another without any parameters will output a mostly empty document.
+        </p>
+        <p>
+          The solution to this is mappings. Mappings define temporary renamings of types or features during import and export. 
+          There are two types of mappings implemented in this interface: type and feature.
+        </p>
+        <h5>Type Mappings</h5>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th scope="col">In Type</th>
+              <th scope="col">Out Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>sentence</td>
+              <td>phrase</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          A type mapping establishes an equivalence between two different type names. 
+          A type refers to a category particular to a specific file format.
+          In the mapping above, we declare that a sentence in a CoNLL-U file should be treated by the format converter as if it said phrase. 
+          So, since the CoNLL-U converters operate on sentence nodes and the FLExText converters operate on phrase nodes, we could use this mapping to convert from CoNLL-U to FLExText.
+        </p>
+        <h5>Feature Mappings</h5>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th scope="col">In Feature</th>
+              <th scope="col">Out Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>UD:lemma</td>
+              <td>FlexText:en:lem</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Similarly, a feature mapping establishes an equivalence for a particular feature name. 
+          A feature refers to the category of a particular instance of data of a particular type.
+          Here we're mapping between the CoNLL-U UD:lemma, of the type "word," and the FLExText FlexText:en:lem, also of type "word."
+          Because these types have the same name, they do not require a type mapping to establish an equivalence.
+        </p>
+        <p>A table containing file types alongside their corresponding prefixes used for feature mappings can be found below:</p>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th scope="col">File Type</th>
+              <th scope="col">Prefix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FlexText</td>
+              <td>FlexText</td>
+            </tr>
+            <tr>
+              <td>Conllu</td>
+              <td>UD</td>
+            </tr>
+            <tr>
+              <td>NLP</td>
+              <td>nlp</td>
+            </tr>
+            <tr>
+              <td>ELAN</td>
+              <td>ELAN</td>
+            </tr>
+            <tr>
+              <td>Macula</td>
+              <td>macula</td>
+            </tr>
+            <tr>
+              <td>SFM</td>
+              <td>SFM</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </main>
   </body>
