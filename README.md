@@ -27,7 +27,7 @@ The installation package files can be found on the [GitHub Releases](https://git
 - #### Mac 
   - zip folder
 
-https://github.com/user-attachments/assets/2d26076c-cc3c-4107-a997-a327699756a9
+https://github.com/user-attachments/assets/c6f9fcc4-7cbc-4c31-b89d-6f3a4a64a186
 
 - #### Linux (Debian-based distributions only)
   - .deb package
@@ -37,8 +37,4 @@ https://github.com/user-attachments/assets/8a2e8899-2cf1-421b-a0fd-76f046e0b421
 - #### Windows 
   - .Setup.exe
 
-https://github.com/user-attachments/assets/dce5a424-8e19-49ee-80e4-b36995de4967
-
-### Contributing
-
-Please see the [Issues](https://github.com/ElizabethThorner/FrontEndRebabel/issues) page of this repo for ideas about improving reBabel.
+https://github.com/user-attachments/assets/564b73ed-9eaa-42bd-aee8-db6f99e1a3e2

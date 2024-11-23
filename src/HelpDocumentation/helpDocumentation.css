@@ -1,11 +1,15 @@
 header {
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 nav {
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 a {
@@ -14,7 +18,16 @@ a {
 }
 
 a:hover {
-  font-weight: 500;
+  text-decoration: underline;
+}
+
+li > ul {
+  margin-bottom: 0rem;
+  margin-top: 0.2rem;
+}
+
+li {
+  padding: 0rem;
 }
 
 table {
@@ -23,4 +36,8 @@ table {
 
 td {
   text-align: center;
+}
+
+body {
+  overflow-y: scroll; /* Always show vertical scrollbar */
 }
