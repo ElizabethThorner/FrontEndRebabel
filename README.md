@@ -41,4 +41,4 @@ https://github.com/user-attachments/assets/dce5a424-8e19-49ee-80e4-b36995de4967
 
 ### Contributing
 
-Please see the Issues page of this repo for ideas about improving reBabel.
+Please see the [Issues](https://github.com/ElizabethThorner/FrontEndRebabel/issues) page of this repo for ideas about improving reBabel.
