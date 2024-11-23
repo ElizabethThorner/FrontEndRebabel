@@ -32,7 +32,7 @@ https://github.com/user-attachments/assets/c6f9fcc4-7cbc-4c31-b89d-6f3a4a64a186
 - #### Linux (Debian-based distributions only)
   - .deb package
 
-https://github.com/user-attachments/assets/8a2e8899-2cf1-421b-a0fd-76f046e0b421
+https://github.com/user-attachments/assets/7b119322-21a7-40e4-b911-59f3398324ed
 
 - #### Windows 
   - .Setup.exe
