@@ -33,5 +33,4 @@ https://github.com/user-attachments/assets/8a2e8899-2cf1-421b-a0fd-76f046e0b421
 ## Windows 
   - .Setup.exe
 
-https://github.com/user-attachments/assets/dce5a424-8e19-49ee-80e4-b36995de4967
-
+https://github.com/user-attachments/assets/564b73ed-9eaa-42bd-aee8-db6f99e1a3e2
