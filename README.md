@@ -1,6 +1,6 @@
 ### reBabel
 
-reBabel is a desktop application built with Electron.js that helps linguists convert between language data file formats they use in their research. The application uses the [rebabel-format](https://github.com/mr-martian/rebabel-format) package to convert between file formats like ELAN, flextext, and CoNLL-U. Details about the application's architecture can be found in the Docs folder.
+reBabel is a desktop application built with Electron.js that helps linguists convert between language data file formats they use in their research. The application uses the [rebabel-format](https://github.com/mr-martian/rebabel-format) package to convert between file formats like ELAN, flextext, and CoNLL-U. Details about the application's architecture can be found in the **docs** folder.
 
 ### Run in Development Mode
 1. Clone the repository from GitHub:
