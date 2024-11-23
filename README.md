@@ -28,7 +28,7 @@ https://github.com/user-attachments/assets/c6f9fcc4-7cbc-4c31-b89d-6f3a4a64a186
 ## Linux (Debian-based distributions only)
   - .deb package
 
-https://github.com/user-attachments/assets/8a2e8899-2cf1-421b-a0fd-76f046e0b421
+https://github.com/user-attachments/assets/7dcb39f5-058e-4f1e-b475-2460dc8e74a2
 
 ## Windows 
   - .Setup.exe
