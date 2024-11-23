@@ -22,7 +22,7 @@ reBabel is a desktop application built with Electron.js that helps linguists con
 
 The installation package files can be found on the [GitHub Releases](https://github.com/ElizabethThorner/FrontEndRebabel/releases) page. 
 
-![Screen Shot 2024-10-12 at 8 22 06 AM](https://github.com/user-attachments/assets/5d4ed303-e514-4e2c-aa69-9e74dac2ff46)
+![Screen Shot 2024-11-23 at 11 11 46 AM](https://github.com/user-attachments/assets/18742676-8500-4565-a03b-7c437ea27b58)
 
 - #### Mac 
   - zip folder
