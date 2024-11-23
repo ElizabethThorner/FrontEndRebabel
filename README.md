@@ -23,7 +23,7 @@ The installation package files can be found on the [GitHub Releases](https://git
 ## Mac 
   - zip folder
 
-https://github.com/user-attachments/assets/2d26076c-cc3c-4107-a997-a327699756a9
+https://github.com/user-attachments/assets/c6f9fcc4-7cbc-4c31-b89d-6f3a4a64a186
 
 ## Linux (Debian-based distributions only)
   - .deb package
