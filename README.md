@@ -38,3 +38,7 @@ https://github.com/user-attachments/assets/7b119322-21a7-40e4-b911-59f3398324ed
   - .Setup.exe
 
 https://github.com/user-attachments/assets/564b73ed-9eaa-42bd-aee8-db6f99e1a3e2
+
+### Contributing
+
+Please see the [Issues](https://github.com/ElizabethThorner/FrontEndRebabel/issues) page of this repo for ideas about improving reBabel.
