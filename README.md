@@ -1,4 +1,8 @@
-# Steps for running reBabel in development mode
+### reBabel
+
+reBabel is a desktop application built with Electron.js that helps linguists convert between language data file formats they use in their research. The application uses the [rebabel-format](https://github.com/mr-martian/rebabel-format) package to convert between file formats like ELAN, flextext, and CoNLL-U. Details about the application's architecture can be found in the **docs** folder.
+
+### Run in Development Mode
 1. Clone the repository from GitHub:
     - `git clone https://github.com/ElizabethThorner/FrontEndRebabel.git`
 2. Install the necessary Node.js packages for reBabel:
@@ -8,30 +12,36 @@
 4. Start the application in development mode:
     - `npm run start`
 
-# Troubleshooting
+### Troubleshooting
 - Issues with the virtual environment
     - If your virtual environment is corrupted, you may need to manually delete the **rebabel_scripts/.venv** folder and run `npm run rebabel_convert` to create a new one
 - Issues with the rebabel_convert executable
-    - follow the instructions in **rebabel_scripts/README.md** to generate the rebabel_convert executable manually
+    - Follow the instructions in **rebabel_scripts/README.md** to generate the rebabel_convert executable manually
 
-# reBabel Distributable Installation 
+### Installation 
 
 The installation package files can be found on the [GitHub Releases](https://github.com/ElizabethThorner/FrontEndRebabel/releases) page. 
 
-![Screen Shot 2024-10-12 at 8 22 06 AM](https://github.com/user-attachments/assets/5d4ed303-e514-4e2c-aa69-9e74dac2ff46)
+![Screen Shot 2024-11-23 at 11 11 46 AM](https://github.com/user-attachments/assets/18742676-8500-4565-a03b-7c437ea27b58)
 
-## Mac 
+- #### Mac 
   - zip folder
 
-https://github.com/user-attachments/assets/2d26076c-cc3c-4107-a997-a327699756a9
+https://github.com/user-attachments/assets/c6f9fcc4-7cbc-4c31-b89d-6f3a4a64a186
 
-## Linux (Debian-based distributions only)
+- #### Linux (Debian-based distributions only)
   - .deb package
 
-https://github.com/user-attachments/assets/8a2e8899-2cf1-421b-a0fd-76f046e0b421
+https://github.com/user-attachments/assets/7b119322-21a7-40e4-b911-59f3398324ed
 
-## Windows 
+- #### Windows 
   - .Setup.exe
 
-https://github.com/user-attachments/assets/dce5a424-8e19-49ee-80e4-b36995de4967
+https://github.com/user-attachments/assets/564b73ed-9eaa-42bd-aee8-db6f99e1a3e2
 
+### Contributing
+
+Please see the [Issues](https://github.com/ElizabethThorner/FrontEndRebabel/issues) page of this repo for ideas about improving reBabel.
+
+### License
+reBabel is licensed under the [MIT license](./LICENSE.txt)
